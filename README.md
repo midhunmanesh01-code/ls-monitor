@@ -15,26 +15,6 @@
 
 ---
 
-## 📋 Table of Contents
-
-- [Overview](#-overview)
-- [Key Features](#-key-features)
-- [Tech Stack](#-tech-stack)
-- [Project Architecture](#-project-architecture)
-- [Directory Structure](#-directory-structure)
-- [Prerequisites](#-prerequisites)
-- [Getting Started](#-getting-started)
-  - [1. Clone Repository](#1-clone-the-repository)
-  - [2. Backend Setup](#2-backend-setup)
-  - [3. Frontend Setup](#3-frontend-setup)
-- [API Documentation](#-api-documentation)
-- [Configuration](#-configuration)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
 ## 🌍 Overview
 
 **LS-Monitor** is an end-to-end monitoring solution designed to aggregate, analyze, and visualize geotechnical and environmental sensor telemetry for slopes susceptible to landslides. By providing high-throughput REST APIs and an intuitive web interface, LS-Monitor enables proactive landslide hazard management, critical alerting, and automated risk detection.
