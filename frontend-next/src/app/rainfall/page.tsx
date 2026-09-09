@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import RainfallChart from '@/components/rainfall/RainfallChart';
 import ThresholdStatus from '@/components/rainfall/ThresholdStatus';
 import ReplayControl from '@/components/rainfall/ReplayControl';
+import { RainfallSkeleton } from '@/components/common/Skeleton';
 import { useReplay } from '@/hooks/useReplay';
 import { getZones } from '@/services/zones';
 import { getAllRainfallData } from '@/services/rainfall';
@@ -16,14 +17,19 @@ export default function RainfallPage() {
   const [rainfallDataMap, setRainfallDataMap] = useState<Record<string, RainfallData>>({});
   const [selectedZoneId, setSelectedZoneId] = useState('zone-a');
   const [isReplayMode, setIsReplayMode] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const replay = useReplay(DEMO_REPLAY_FRAMES);
 
   useEffect(() => {
     async function load() {
-      const [z, r] = await Promise.all([getZones(), getAllRainfallData()]);
-      setZones(z);
-      setRainfallDataMap(r);
+      try {
+        const [z, r] = await Promise.all([getZones(), getAllRainfallData()]);
+        setZones(z);
+        setRainfallDataMap(r);
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
@@ -39,6 +45,10 @@ export default function RainfallPage() {
         readings: activeZoneRainfall?.readings || [],
       }
     : activeZoneRainfall;
+
+  if (loading) {
+    return <RainfallSkeleton />;
+  }
 
   return (
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">

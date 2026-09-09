@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import DynamicMap from '@/components/map/DynamicMap';
 import RiskPanel from '@/components/risk/RiskPanel';
 import StatusBadge from '@/components/common/StatusBadge';
+import { DashboardSkeleton } from '@/components/common/Skeleton';
 import { getZones } from '@/services/zones';
 import { getAlerts } from '@/services/alerts';
 import { getFieldReports } from '@/services/fieldReports';
@@ -42,6 +43,10 @@ export default function DashboardPage() {
     }
     loadData();
   }, []);
+
+  if (loading) {
+    return <DashboardSkeleton />;
+  }
 
   const selectedZone = zones.find((z) => z.id === selectedZoneId) || null;
 

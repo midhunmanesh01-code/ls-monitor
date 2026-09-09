@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import DynamicMap from '@/components/map/DynamicMap';
 import RiskPanel from '@/components/risk/RiskPanel';
 import StatusBadge from '@/components/common/StatusBadge';
+import { RiskMapSkeleton } from '@/components/common/Skeleton';
 import { getZones } from '@/services/zones';
 import { getFieldReports } from '@/services/fieldReports';
 import { DEMO_ROADS, DEMO_BUILDINGS, DEMO_LANDSLIDE_MARKERS } from '@/data/infrastructure';
@@ -19,15 +20,21 @@ export default function RiskMapPage() {
   const [showLandslides, setShowLandslides] = useState(true);
   const [showFieldReports, setShowFieldReports] = useState(true);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       const [z, r] = await Promise.all([getZones(), getFieldReports()]);
       setZones(z);
       setReports(r);
+      setLoading(false);
     }
     load();
   }, []);
+
+  if (loading) {
+    return <RiskMapSkeleton />;
+  }
 
   const selectedZone = zones.find((z) => z.id === selectedZoneId) || null;
 

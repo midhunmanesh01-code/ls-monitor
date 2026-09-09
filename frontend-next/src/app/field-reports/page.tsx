@@ -5,6 +5,7 @@ import FieldReportCard from '@/components/field/FieldReportCard';
 import FieldReportForm from '@/components/field/FieldReportForm';
 import SyncQueue from '@/components/field/SyncQueue';
 import OfflineIndicator from '@/components/field/OfflineIndicator';
+import { FieldReportsSkeleton } from '@/components/common/Skeleton';
 import { useOffline } from '@/hooks/useOffline';
 import { useSyncQueue } from '@/hooks/useSyncQueue';
 import { verifyReport, resetFieldReports } from '@/services/fieldReports';
@@ -13,11 +14,15 @@ import { FileText, PlusCircle, ListFilter, RefreshCw, AlertCircle, ShieldCheck }
 
 export default function FieldReportsPage() {
   const { isOffline, toggleOffline } = useOffline();
-  const { reports, isSyncing, triggerSync, refreshReports } = useSyncQueue();
+  const { reports, loading, isSyncing, triggerSync, refreshReports } = useSyncQueue();
 
   const [activeTab, setActiveTab] = useState<'FEED' | 'SUBMIT'>('FEED');
   const [verificationFilter, setVerificationFilter] = useState<string>('ALL');
   const [notification, setNotification] = useState<string | null>(null);
+
+  if (loading) {
+    return <FieldReportsSkeleton />;
+  }
 
   const handleVerify = async (
     reportId: string,

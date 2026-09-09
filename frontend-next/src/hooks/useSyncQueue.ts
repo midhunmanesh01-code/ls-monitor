@@ -6,12 +6,17 @@ import { getFieldReports, syncReports } from '@/services/fieldReports';
 
 export function useSyncQueue() {
   const [reports, setReports] = useState<FieldReport[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isSyncing, setIsSyncing] = useState(false);
   const [lastSyncTime, setLastSyncTime] = useState<string | null>(null);
 
   const refreshReports = useCallback(async () => {
-    const all = await getFieldReports();
-    setReports([...all]);
+    try {
+      const all = await getFieldReports();
+      setReports([...all]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -34,6 +39,7 @@ export function useSyncQueue() {
 
   return {
     reports,
+    loading,
     pendingCount,
     isSyncing,
     lastSyncTime,

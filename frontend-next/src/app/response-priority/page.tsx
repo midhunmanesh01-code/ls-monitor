@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import ResponsePriority from '@/components/priority/ResponsePriority';
+import { ResponsePrioritySkeleton } from '@/components/common/Skeleton';
 import { getResponsePriority } from '@/services/responsePriority';
 import type { ResponsePriorityItem } from '@/types';
 import { ListOrdered, ShieldAlert, Users, Truck, AlertTriangle } from 'lucide-react';
@@ -12,12 +13,19 @@ export default function ResponsePriorityPage() {
 
   useEffect(() => {
     async function load() {
-      const data = await getResponsePriority();
-      setItems(data);
-      setLoading(false);
+      try {
+        const data = await getResponsePriority();
+        setItems(data);
+      } finally {
+        setLoading(false);
+      }
     }
     load();
   }, []);
+
+  if (loading) {
+    return <ResponsePrioritySkeleton />;
+  }
 
   return (
     <div className="p-4 md:p-6 space-y-6 max-w-7xl mx-auto">
@@ -43,13 +51,7 @@ export default function ResponsePriorityPage() {
       </div>
 
       {/* Main Ranking Matrix Component */}
-      {loading ? (
-        <div className="py-16 text-center text-xs text-slate-500">
-          Calculating multi-criteria response priorities...
-        </div>
-      ) : (
-        <ResponsePriority items={items} />
-      )}
+      <ResponsePriority items={items} />
     </div>
   );
 }

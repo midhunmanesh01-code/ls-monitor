@@ -2,23 +2,33 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import AlertCard from '@/components/alerts/AlertCard';
+import { AlertsSkeleton } from '@/components/common/Skeleton';
 import { getAlerts, updateAlertStatus, resetAlerts } from '@/services/alerts';
 import type { Alert, AlertStatus } from '@/types';
 import { Bell, AlertTriangle, ShieldCheck, RefreshCw, Filter, ShieldAlert } from 'lucide-react';
 
 export default function AlertsPage() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('ALL');
   const [statusNotification, setStatusNotification] = useState<string | null>(null);
 
   const loadAlerts = useCallback(async () => {
-    const data = await getAlerts();
-    setAlerts([...data]);
+    try {
+      const data = await getAlerts();
+      setAlerts([...data]);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
   useEffect(() => {
     loadAlerts();
   }, [loadAlerts]);
+
+  if (loading) {
+    return <AlertsSkeleton />;
+  }
 
   const handleStatusChange = async (
     alertId: string,
