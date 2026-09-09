@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Mountain } from 'lucide-react';
+import Logo from '@/components/common/Logo';
 
 export default function LoadingScreen() {
   const [fading, setFading] = useState(false);
@@ -32,10 +32,8 @@ export default function LoadingScreen() {
       }`}
     >
       <div className="flex flex-col items-center space-y-6">
-        {/* Minimal App Icon */}
-        <div className="w-14 h-14 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center shadow-xl">
-          <Mountain className="w-6 h-6 text-amber-500" />
-        </div>
+        {/* Custom Landslide Monitor Logo */}
+        <Logo size="lg" />
 
         {/* Clean Minimal Typography */}
         <div className="text-center space-y-1">

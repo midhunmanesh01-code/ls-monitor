@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import Logo from '@/components/common/Logo';
 import {
   LayoutDashboard,
   Map,
@@ -13,7 +14,6 @@ import {
   History,
   Menu,
   X,
-  Mountain,
   Radio,
 } from 'lucide-react';
 
@@ -35,18 +35,8 @@ export default function Sidebar() {
     <>
       {/* Mobile Top Header Bar */}
       <header className="lg:hidden shrink-0 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 px-3 py-2.5 flex items-center justify-between z-30">
-        <Link href="/dashboard" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-amber-600/20 border border-amber-600/40 flex items-center justify-center">
-            <Mountain className="w-4 h-4 text-amber-500" />
-          </div>
-          <div>
-            <div className="text-xs font-bold text-slate-100 tracking-wide flex items-center gap-1.5">
-              <span>Landslide Monitor</span>
-              <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase font-mono font-semibold">
-                Wayanad
-              </span>
-            </div>
-          </div>
+        <Link href="/dashboard" className="flex items-center">
+          <Logo size="sm" showText={true} />
         </Link>
 
         <div className="flex items-center gap-2">
@@ -84,19 +74,9 @@ export default function Sidebar() {
       >
         {/* Logo / Drawer Header */}
         <div className="px-4 py-4 border-b border-slate-800 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-amber-600/20 border border-amber-600/40 flex items-center justify-center">
-              <Mountain className="w-5 h-5 text-amber-500" />
-            </div>
-            <div>
-              <h1 className="text-sm font-bold text-slate-100 tracking-wide">
-                Landslide Monitor
-              </h1>
-              <span className="text-[10px] font-medium text-amber-500/80 uppercase tracking-widest">
-                Wayanad Pilot
-              </span>
-            </div>
-          </div>
+          <Link href="/dashboard" className="flex items-center">
+            <Logo size="md" showText={true} />
+          </Link>
 
           {/* Close button inside mobile drawer */}
           <button
