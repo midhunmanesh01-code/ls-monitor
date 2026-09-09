@@ -150,7 +150,7 @@ export default function RiskMapPage() {
         </div>
 
         {/* Map Area */}
-        <div className="flex-1 relative min-h-0 h-full">
+        <div className="flex-1 relative min-h-0 h-full isolate z-0">
           {/* Quick Zone Switcher Bar for Mobile & Quick Access */}
           <div className="md:hidden absolute top-2 left-2 right-2 z-20 flex items-center gap-1.5 bg-slate-950/90 backdrop-blur p-1.5 rounded-lg border border-slate-800 shadow-xl overflow-x-auto no-scrollbar max-w-[calc(100%-16px)]">
             <span className="text-[10px] uppercase font-mono font-bold text-slate-400 px-1 shrink-0">

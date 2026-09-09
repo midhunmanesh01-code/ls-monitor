@@ -122,7 +122,7 @@ export default function DashboardPage() {
       {/* Main Command Workspace */}
       <div className="flex-1 relative flex flex-col md:flex-row min-h-0 overflow-hidden">
         {/* Interactive GIS Map Container */}
-        <div className="flex-1 relative min-h-0 h-full">
+        <div className="flex-1 relative min-h-0 h-full isolate z-0">
           {/* Quick Zone Switcher Bar */}
           <div className="absolute top-2 left-2 right-2 sm:right-auto z-20 flex items-center gap-1.5 bg-slate-950/90 backdrop-blur p-1.5 rounded-lg border border-slate-800 shadow-xl overflow-x-auto no-scrollbar max-w-[calc(100%-16px)] sm:max-w-max">
             <span className="text-[10px] uppercase font-mono font-bold text-slate-400 px-1 shrink-0">
