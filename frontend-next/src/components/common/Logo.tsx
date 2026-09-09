@@ -1,5 +1,7 @@
 'use client';
 
+import { useId } from 'react';
+
 interface LogoProps {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   showText?: boolean;
@@ -7,6 +9,9 @@ interface LogoProps {
 }
 
 export default function Logo({ size = 'md', showText = false, className = '' }: LogoProps) {
+  const rawId = useId();
+  const uid = rawId.replace(/[^a-zA-Z0-9]/g, ''); // unique prefix for SVG IDs
+
   const sizeMap = {
     xs: { box: 'w-6 h-6', text: 'text-xs', sub: 'text-[8px]' },
     sm: { box: 'w-8 h-8', text: 'text-xs', sub: 'text-[9px]' },
@@ -18,46 +23,33 @@ export default function Logo({ size = 'md', showText = false, className = '' }: 
   const s = sizeMap[size];
 
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
+    <div className={`flex items-center gap-2.5 shrink-0 ${className}`}>
       {/* SVG Icon Emblem */}
       <div className={`${s.box} shrink-0 relative flex items-center justify-center`}>
         <svg
           viewBox="0 0 100 100"
-          className="w-full h-full drop-shadow-[0_2px_8px_rgba(245,158,11,0.25)]"
+          className="w-full h-full drop-shadow-md"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            {/* Background container gradient */}
-            <linearGradient id="lsBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id={`bg_${uid}`} x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#1e293b" />
-              <stop offset="100%" stopColor="#090d16" />
+              <stop offset="100%" stopColor="#0f172a" />
             </linearGradient>
-
-            {/* Main Peak Sunlit Face */}
-            <linearGradient id="lsMainPeakLit" x1="30%" y1="10%" x2="70%" y2="90%">
+            <linearGradient id={`left_${uid}`} x1="20" y1="35" x2="60" y2="75" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="100%" stopColor="#0369a1" />
+            </linearGradient>
+            <linearGradient id={`main_${uid}`} x1="35" y1="20" x2="65" y2="75" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#fef08a" />
-              <stop offset="50%" stopColor="#f59e0b" />
+              <stop offset="60%" stopColor="#f59e0b" />
               <stop offset="100%" stopColor="#d97706" />
             </linearGradient>
-
-            {/* Main Peak Shadow Face */}
-            <linearGradient id="lsMainPeakShadow" x1="60%" y1="20%" x2="100%" y2="100%">
+            <linearGradient id={`shadow_${uid}`} x1="65" y1="20" x2="85" y2="75" gradientUnits="userSpaceOnUse">
               <stop offset="0%" stopColor="#d97706" />
               <stop offset="100%" stopColor="#78350f" />
             </linearGradient>
-
-            {/* Back Mountain Ridge */}
-            <linearGradient id="lsBackRidge" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.85" />
-              <stop offset="100%" stopColor="#0369a1" stopOpacity="0.4" />
-            </linearGradient>
-
-            {/* Glow Filter */}
-            <filter id="lsGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="3" result="blur" />
-              <feComposite in="SourceGraphic" in2="blur" operator="over" />
-            </filter>
           </defs>
 
           {/* Squircle Badge Base */}
@@ -66,70 +58,47 @@ export default function Logo({ size = 'md', showText = false, className = '' }: 
             y="4"
             width="92"
             height="92"
-            rx="24"
-            fill="url(#lsBgGrad)"
+            rx="22"
+            fill={`url(#bg_${uid})`}
             stroke="#f59e0b"
             strokeWidth="2.5"
             strokeOpacity="0.4"
           />
 
-          {/* Subtle Elevation Contour Curves */}
-          <path
-            d="M 12 76 Q 50 64 88 76"
-            stroke="#334155"
-            strokeWidth="1.5"
-            strokeDasharray="3 3"
-            fill="none"
-          />
+          {/* Background Mountain */}
+          <polygon points="18,75 42,35 66,75" fill={`url(#left_${uid})`} opacity="0.9" />
 
-          {/* Secondary Background Mountain */}
-          <path
-            d="M 16 75 L 42 34 L 64 75 Z"
-            fill="url(#lsBackRidge)"
-          />
+          {/* Main Mountain - Left Lit Facet */}
+          <polygon points="34,75 62,20 62,75" fill={`url(#main_${uid})`} />
 
-          {/* Primary Landslide / Escarpment Peak - Lit Face */}
-          <path
-            d="M 32 75 L 64 18 L 64 75 Z"
-            fill="url(#lsMainPeakLit)"
-          />
+          {/* Main Mountain - Right Shadow Facet */}
+          <polygon points="62,20 86,75 62,75" fill={`url(#shadow_${uid})`} />
 
-          {/* Primary Peak - Shadow Face */}
+          {/* Landslide Scar / Slope Fracture Line */}
           <path
-            d="M 64 18 L 86 75 L 64 75 Z"
-            fill="url(#lsMainPeakShadow)"
-          />
-
-          {/* Dynamic Geotechnical Instability / Pulse Sensor Wave */}
-          <path
-            d="M 22 62 L 38 62 L 46 50 L 54 68 L 62 54 L 78 54"
-            stroke="#ffffff"
+            d="M 62 20 L 52 46 L 62 58 L 48 75"
+            stroke="#ef4444"
             strokeWidth="3.5"
             strokeLinecap="round"
             strokeLinejoin="round"
-            filter="url(#lsGlow)"
-          />
-          <path
-            d="M 22 62 L 38 62 L 46 50 L 54 68 L 62 54 L 78 54"
-            stroke="#f59e0b"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
           />
 
-          {/* Early Warning Signal Apex Beacon */}
-          <circle cx="64" cy="18" r="4" fill="#10b981" />
-          <circle cx="64" cy="18" r="7" stroke="#10b981" strokeWidth="1.5" strokeOpacity="0.7" />
+          {/* Ground Level Horizon */}
+          <line x1="14" y1="75" x2="86" y2="75" stroke="#475569" strokeWidth="2" strokeLinecap="round" />
+
+          {/* Early Warning Signal Radar Waves at Peak */}
+          <circle cx="62" cy="20" r="4.5" fill="#10b981" />
+          <circle cx="62" cy="20" r="8.5" stroke="#10b981" strokeWidth="1.5" strokeOpacity="0.75" />
         </svg>
       </div>
 
-      {/* Optional Typography Lockup */}
+      {/* Typography Lockup */}
       {showText && (
-        <div className="min-w-0">
+        <div className="min-w-0 flex flex-col justify-center">
           <div className={`${s.text} font-bold text-slate-100 tracking-wide leading-tight truncate`}>
             Landslide Monitor
           </div>
-          <div className={`${s.sub} font-medium text-amber-400/90 uppercase tracking-widest font-mono truncate`}>
+          <div className={`${s.sub} font-semibold text-amber-400 uppercase tracking-widest font-mono truncate`}>
             Wayanad Pilot
           </div>
         </div>

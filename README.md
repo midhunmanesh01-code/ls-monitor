@@ -1,15 +1,19 @@
 <div align="center">
 
-  <img src="frontend/assets/logo.png" alt="LandSlide Monitor Logo" width="120" />
+  <img src="frontend-next/public/logo.svg" alt="LandSlide Monitor Logo" width="120" />
 
-  # LS-Monitor (LandSlide Monitor)
+  # Landslide Monitor (LS-Monitor)
 
-  **A modern, real-time monitoring and early-warning platform for landslide risk assessment.**
+  **AI-Assisted Early Warning, Geotechnical Risk Assessment & Emergency Response Platform**
+  *Pilot Deployment: Wayanad District (Meppadi • Vythiri • Mundakkai • Chooralmala)*
 
-  [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+  [![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=next.js&logoColor=white)](https://nextjs.org/)
+  [![React](https://img.shields.io/badge/React-19.0-blue?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+  [![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
   [![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
-  [![Uvicorn](https://img.shields.io/badge/ASGI-Uvicorn-2C3E50?style=for-the-badge&logo=gunicorn&logoColor=white)](https://www.uvicorn.org/)
-  [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
+  [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+  [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE.md)
 
 </div>
 
@@ -17,17 +21,23 @@
 
 ## 🌍 Overview
 
-**LS-Monitor** is an end-to-end monitoring solution designed to aggregate, analyze, and visualize geotechnical and environmental sensor telemetry for slopes susceptible to landslides. By providing high-throughput REST APIs and an intuitive web interface, LS-Monitor enables proactive landslide hazard management, critical alerting, and automated risk detection.
+**Landslide Monitor (LS-Monitor)** is an end-to-end, operations-grade disaster decision-support platform engineered for District Emergency Operations Centres (DEOC) and state disaster management authorities.
+
+Designed around the **July 2024 Wayanad Disaster Sequence (Meppadi–Chooralmala–Mundakkai)**, LS-Monitor integrates real-time Automatic Weather Station (AWS) telemetry, empirical Intensity-Duration (I-D) rainfall failure thresholds, high-resolution GIS hazard overlays, crowd-sourced field truthing with offline sync, and multi-criteria emergency response resource dispatch.
 
 ---
 
-## ✨ Key Features
+## ✨ Key Features & Capabilities
 
-- ⚡ **High-Performance Backend**: Built with **FastAPI** and asynchronous request handling for rapid sensor data processing.
-- 🩺 **Built-in System Health Checks**: Automated service health reporting available at `/api/health`.
-- 📖 **Interactive API Documentation**: Out-of-the-box Swagger UI (`/docs`) and ReDoc (`/redoc`) for real-time endpoint inspection and testing.
-- 🧱 **Modular Architecture**: Layered design dividing concerns across data models (`models`), endpoints (`routes`), business logic (`services`), and helpers (`utils`).
-- 🖥️ **Lightweight Web Interface**: Clean frontend client for quick dashboard monitoring and visualization.
+- 🗺️ **DEOC Command Center Dashboard**: Interactive full-screen GIS hazard map with real-time sector risk gauges, triggering factor breakdowns, and infrastructure exposure analytics.
+- 📱 **Mobile-Optimized Experience**: Full mobile responsiveness featuring a dedicated bottom navigation bar, touch-friendly bottom sheets for sector risk panels, and collapsible layer toggles.
+- ⚡ **Minimalist Loading Screen & Buffering States**: Seamless 3-second startup transition with custom SVG branding and non-blocking background telemetry sync.
+- 💀 **Complete Dark-Theme Skeletons**: High-fidelity dark slate skeleton screens across all 7 operational modules for smooth data transitions.
+- 🌧️ **Empirical Rainfall Thresholds**: Real-time 24h/72h Intensity-Duration (I-D) hyetograph analytics and animated storm simulation replay.
+- 📋 **Offline-First Field Intel**: Ground-truthing observation submission with local queuing, offline status simulation, and geologist verification quarantine.
+- 🔔 **Statutory Early Warning Workflow**: Multi-tier alert chain of command (`DRAFT` &rarr; `AWAITING_AUTHORIZATION` &rarr; `AUTHORIZED` &rarr; `DISSEMINATED`).
+- 🚒 **Emergency Response Resource Prioritization**: Multi-criteria decision support matrix ranking sectors for NDRF, SDRF, Fire & Rescue, and PWD road clearing deployments.
+- 📜 **Historical Disaster Replay**: Retrospective step-by-step case study of the July 28–30, 2024 Wayanad debris flow sequence.
 
 ---
 
@@ -35,229 +45,160 @@
 
 | Layer | Technology | Description |
 | :--- | :--- | :--- |
-| **Backend Framework** | [FastAPI](https://fastapi.tiangolo.com/) | Modern, fast web framework for building APIs with Python |
-| **ASGI Server** | [Uvicorn](https://www.uvicorn.org/) | Lightning-fast ASGI server implementation |
-| **Frontend** | HTML5 / CSS3 / JavaScript | Client interface for monitoring and alerts |
-| **API Docs** | Swagger UI & ReDoc | Automatic interactive OpenAPI documentation |
+| **Frontend Framework** | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) | Server & client hybrid rendering with React 19 and TypeScript |
+| **Styling & UI** | [Tailwind CSS v4](https://tailwindcss.com/) | Dark slate emergency command console theme (`bg-slate-950`) |
+| **Geospatial Mapping** | [Leaflet](https://leafletjs.com/) + React-Leaflet | OpenStreetMap cartography, GeoJSON risk zones, and vector overlays |
+| **Data Visualizations** | [Recharts](https://recharts.org/) | Rainfall hyetographs, cumulative threshold curves, and risk gauges |
+| **Backend Framework** | [FastAPI](https://fastapi.tiangolo.com/) + [Uvicorn](https://www.uvicorn.org/) | Asynchronous high-performance Python REST API |
+| **Icons & Typography** | [Lucide React](https://lucide.dev/) + Inter Font | Modern, clean vector iconography and typography |
 
 ---
 
-## 🏗️ Project Architecture
+## 🏛️ System Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      Client / Browser                       │
-│              (Web Dashboard & Real-Time Views)              │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ HTTP / REST
-                               ▼
-┌─────────────────────────────────────────────────────────────┐
-│                     FastAPI Application                     │
-│ ┌─────────────────────────────────────────────────────────┐ │
-│ │                  API Routers (/api/*)                   │ │
-│ └────────────┬──────────────────────────────┬─────────────┘ │
-│              │                              │               │
-│              ▼                              ▼               │
-│ ┌─────────────────────────┐    ┌──────────────────────────┐ │
-│ │    Business Services    │    │      Data Models         │ │
-│ │       (app/services)    │    │      (app/models)        │ │
-│ └────────────┬────────────┘    └──────────────────────────┘ │
-│              ▼                                              │
-│ ┌─────────────────────────┐                                 │
-│ │   Utilities & Helpers   │                                 │
-│ │       (app/utils)       │                                 │
-│ └─────────────────────────┘                                 │
-└─────────────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────────────┐
+│                        User & Field Officer Client                     │
+│                (Next.js 16 • React 19 • Tailwind CSS v4)               │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ HTTP / REST / Telemetry
+                                    ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                        Decoupled Service Layer                         │
+│   ┌───────────────┬────────────────┬───────────────┬───────────────┐   │
+│   │ zones.ts      │ rainfall.ts    │ alerts.ts     │ fieldReports  │   │
+│   └───────┬───────┴────────┬───────┴───────┬───────┴───────┬───────┘   │
+└───────────┼────────────────┼───────────────┼───────────────┼───────────┘
+            ▼                ▼               ▼               ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                    FastAPI Backend Microservices                       │
+│ ┌────────────────────────────────────────────────────────────────────┐ │
+│ │  /api/health • /api/zones • /api/rainfall • /api/alerts • /api/risk │ │
+│ └────────────────────────────────────────────────────────────────────┘ │
+└────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 📂 Directory Structure
+## 📂 Project Directory Structure
 
 ```text
-LS-Monitor/
+ls-monitor/
 ├── backend/
 │   ├── app/
-│   │   ├── models/            # Pydantic & database schema definitions
-│   │   │   └── __init__.py
-│   │   ├── routes/            # API route controllers
-│   │   │   ├── __init__.py
-│   │   │   └── health.py      # Health check endpoint (/api/health)
-│   │   ├── services/          # Business logic, alerting & analytics services
-│   │   │   └── __init__.py
-│   │   ├── utils/             # Reusable helper functions & loggers
-│   │   │   └── __init__.py
-│   │   ├── __init__.py
-│   │   └── main.py            # FastAPI entrypoint & router registrations
-│   └── requirements.txt       # Python backend dependencies
-├── frontend/
-│   ├── assets/                # Static assets (logos, images, icons)
-│   │   └── logo.png
-│   ├── css/                   # Stylesheets
-│   │   └── style.css
-│   ├── js/                    # Client scripts and DOM interactions
-│   │   └── script.js
-│   └── index.html             # Web dashboard entry point
-├── .gitignore                 # Files and directories ignored by Git
+│   │   ├── models/            # Pydantic schema models
+│   │   ├── routes/            # FastAPI route controllers (/api/health, etc.)
+│   │   ├── services/          # Analytics & hazard detection services
+│   │   ├── utils/             # Helper utilities & loggers
+│   │   └── main.py            # FastAPI ASGI entrypoint
+│   └── requirements.txt       # Backend dependencies
+│
+├── frontend-next/             # Modern Next.js App Router Frontend
+│   ├── public/
+│   │   └── logo.svg           # Custom vector SVG platform logo
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── dashboard/     # DEOC Command Center GIS Map & Risk Panel
+│   │   │   ├── risk-map/      # Fullscreen GIS Hazard Map with Layer Toggles
+│   │   │   ├── rainfall/      # 24h/72h I-D Threshold Analytics & Storm Replay
+│   │   │   ├── field-reports/ # Offline-First Field Intel & Verification Hub
+│   │   │   ├── alerts/        # Early Warning Protocol & Authority Sign-off
+│   │   │   ├── response-priority/ # Multi-Criteria Resource Allocation Matrix
+│   │   │   ├── historical/    # July 2024 Wayanad Disaster Case Study Replay
+│   │   │   ├── globals.css    # Dark Command Palette, Leaflet z-index isolation
+│   │   │   ├── layout.tsx     # App Shell layout with Navigation
+│   │   │   └── page.tsx       # Root redirect to /dashboard
+│   │   ├── components/
+│   │   │   ├── common/        # Logo, LoadingScreen, Skeletons, StatusBadges
+│   │   │   ├── layout/        # Sidebar, BottomNav, TopHeader
+│   │   │   ├── map/           # DynamicMap, MapInner (Leaflet isolation)
+│   │   │   ├── rainfall/      # RainfallChart, ThresholdStatus, ReplayControl
+│   │   │   ├── field/         # FieldReportCard, FieldReportForm, SyncQueue
+│   │   │   ├── alerts/        # AlertCard, AlertTimeline, AlertWorkflow
+│   │   │   ├── priority/      # ResponsePriority matrix cards
+│   │   │   └── risk/          # RiskPanel, RiskGauge, ContributingFactors
+│   │   ├── data/              # Pilot infrastructure, zones & historical frames
+│   │   ├── hooks/             # useOffline, useReplay, useSyncQueue
+│   │   ├── services/          # Decoupled service layer ready for live API
+│   │   └── types/             # TypeScript domain definitions
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── LICENSE.md                 # MIT License
 └── README.md                  # Project documentation
 ```
 
 ---
 
-## ⚙️ Prerequisites
+## 🚀 Quick Start Guide
 
-Before running LS-Monitor, make sure you have the following installed:
-
-- **Python 3.9+** ([Download Python](https://www.python.org/downloads/))
-- **pip** (Python package installer)
-- A modern web browser (Google Chrome, Mozilla Firefox, Microsoft Edge, etc.)
+### 1. Prerequisites
+- **Node.js** 18.17+ or 20+
+- **Python** 3.9+
 
 ---
 
-## 🚀 Getting Started
-
-### 1. Clone the Repository
+### 2. Frontend Setup (Next.js)
 
 ```bash
-git clone https://github.com/your-username/LS-Monitor.git
-cd LS-Monitor
+# Navigate to the frontend directory
+cd frontend-next
+
+# Install dependencies
+npm install
+
+# Run local development server
+npm run dev
+
+# Run production build & verify
+npm run build
+npm run start
 ```
 
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
 ---
 
-### 2. Backend Setup
-
-#### a. Navigate to the backend directory
+### 3. Backend Setup (FastAPI)
 
 ```bash
+# Navigate to backend directory
 cd backend
-```
 
-#### b. Create and activate a virtual environment
+# Create and activate virtual environment
+python -m venv venv
+# Windows:
+.\venv\Scripts\activate
+# Linux/macOS:
+source venv/bin/activate
 
-- **Windows (PowerShell)**:
-  ```powershell
-  python -m venv venv
-  .\venv\Scripts\Activate.ps1
-  ```
-
-- **Windows (Command Prompt)**:
-  ```cmd
-  python -m venv venv
-  .\venv\Scripts\activate.bat
-  ```
-
-- **macOS / Linux**:
-  ```bash
-  python3 -m venv venv
-  source venv/bin/activate
-  ```
-
-#### c. Install dependencies
-
-```bash
+# Install Python dependencies
 pip install -r requirements.txt
-```
 
-#### d. Launch the FastAPI server
-
-```bash
+# Start FastAPI server with live reload
 uvicorn app.main:app --reload --port 8000
 ```
 
-The backend server will start at:
 - **API Base URL**: `http://localhost:8000`
+- **Health Check**: `http://localhost:8000/api/health`
 - **Interactive Swagger Docs**: `http://localhost:8000/docs`
-- **Alternative ReDoc**: `http://localhost:8000/redoc`
 
 ---
 
-### 3. Frontend Setup
+## 🗺️ Operational Modules
 
-The frontend is a lightweight web interface that can be launched directly:
-
-#### Option A: Direct Open
-Simply double-click or open `frontend/index.html` in your web browser.
-
-#### Option B: Local HTTP Server (Recommended)
-From the root directory, you can serve the frontend with Python's built-in HTTP server:
-
-```bash
-# In a separate terminal window
-cd frontend
-python -m http.server 3000
-```
-
-Access the frontend dashboard at `http://localhost:3000`.
-
-> [!TIP]
-> Ensure the backend server is running simultaneously so the frontend can communicate with the API endpoints.
-
----
-
-## 📡 API Documentation
-
-Once the backend is running, the following endpoints are available:
-
-| Method | Endpoint | Description | Sample Response |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/` | API status check | `{"message": "LS-Monitor API is running"}` |
-| `GET` | `/api/health` | Service health status | `{"status": "ok", "service": "LS-Monitor"}` |
-| `GET` | `/docs` | Interactive Swagger UI | Open in browser |
-| `GET` | `/redoc` | ReDoc API documentation | Open in browser |
-
----
-
-## 🔧 Configuration
-
-For environment-specific configuration, create a `.env` file inside the `backend/` directory (ignored by version control):
-
-```env
-# Server Configuration
-HOST=0.0.0.0
-PORT=8000
-ENVIRONMENT=development
-
-# Database (Future integration)
-DATABASE_URL=sqlite:///./ls_monitor.db
-
-# Alerting / Sensor Webhooks
-ALERT_THRESHOLD_MM=50
-```
-
----
-
-## 🗺️ Roadmap
-
-- [ ] **Geotechnical Sensor Telemetry**: Ingestion pipelines for rainfall gauges, pore water pressure sensors, and soil moisture meters.
-- [ ] **Threshold & Early-Warning Alerts**: Automated notifications (Email, SMS, Webhooks) when movement or rainfall thresholds are breached.
-- [ ] **Interactive GIS / Mapping**: Map-based visualization of monitored slopes and hazard zones.
-- [ ] **Database Integration**: Persistent storage using PostgreSQL / SQLite via SQLAlchemy models.
-- [ ] **Authentication & Roles**: Secure endpoints with OAuth2 / JWT authentication.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Follow these steps to contribute:
-
-1. **Fork** the repository.
-2. **Create** your feature branch:
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-3. **Commit** your changes:
-   ```bash
-   git commit -m "Add amazing feature"
-   ```
-4. **Push** to the branch:
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-5. **Open** a Pull Request.
+| Route | Module Name | Core Capabilities |
+| :--- | :--- | :--- |
+| **`/dashboard`** | **DEOC Command Console** | Live GIS overview, real-time ML risk index gauge, quick sector selector, and geomorphological breakdown. |
+| **`/risk-map`** | **GIS Hazard Map** | Multi-layer spatial filters for **Road Networks**, **Vulnerable Structures**, **Historical Scars**, and **Field Intel**. |
+| **`/rainfall`** | **Rainfall & Triggers** | 24h & 72h Intensity-Duration (I-D) failure threshold charts, live telemetry, and **Storm Simulation Playback**. |
+| **`/field-reports`** | **Field Ground Truthing** | Citizen / field officer observation logging, **Offline Queue**, and Geologist verification approval workflow. |
+| **`/alerts`** | **Early Warning Protocol** | Digital authorization workflow enforcing the statutory chain of command (`DRAFT` &rarr; `AUTHORIZED`). |
+| **`/response-priority`** | **Resource Prioritization** | Multi-criteria decision support matrix ranking sectors for NDRF, SDRF, Fire & Rescue, and PWD road clearing teams. |
+| **`/historical`** | **July 2024 Wayanad Replay** | Chronological disaster simulation of the Chooralmala–Mundakkai debris flow event with frame-by-frame step controls. |
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
+This project is licensed under the [MIT License](LICENSE.md).

@@ -1,40 +1,33 @@
 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="lsBgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bg" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#1e293b" />
-      <stop offset="100%" stop-color="#090d16" />
+      <stop offset="100%" stop-color="#0f172a" />
     </linearGradient>
-    <linearGradient id="lsMainPeakLit" x1="30%" y1="10%" x2="70%" y2="90%">
+    <linearGradient id="left" x1="20" y1="35" x2="60" y2="75" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="main" x1="35" y1="20" x2="65" y2="75" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#fef08a" />
-      <stop offset="50%" stop-color="#f59e0b" />
+      <stop offset="60%" stop-color="#f59e0b" />
       <stop offset="100%" stop-color="#d97706" />
     </linearGradient>
-    <linearGradient id="lsMainPeakShadow" x1="60%" y1="20%" x2="100%" y2="100%">
+    <linearGradient id="shadow" x1="65" y1="20" x2="85" y2="75" gradientUnits="userSpaceOnUse">
       <stop offset="0%" stop-color="#d97706" />
       <stop offset="100%" stop-color="#78350f" />
     </linearGradient>
-    <linearGradient id="lsBackRidge" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="#0369a1" stop-opacity="0.4" />
-    </linearGradient>
-    <filter id="lsGlow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="3" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
   </defs>
 
-  <rect x="4" y="4" width="92" height="92" rx="24" fill="url(#lsBgGrad)" stroke="#f59e0b" stroke-width="2.5" stroke-opacity="0.4" />
+  <rect x="4" y="4" width="92" height="92" rx="22" fill="url(#bg)" stroke="#f59e0b" stroke-width="2.5" stroke-opacity="0.4" />
 
-  <path d="M 12 76 Q 50 64 88 76" stroke="#334155" stroke-width="1.5" stroke-dasharray="3 3" fill="none" />
-  <path d="M 16 84 Q 50 74 84 84" stroke="#334155" stroke-width="1" stroke-dasharray="2 4" fill="none" />
+  <polygon points="18,75 42,35 66,75" fill="url(#left)" opacity="0.9" />
+  <polygon points="34,75 62,20 62,75" fill="url(#main)" />
+  <polygon points="62,20 86,75 62,75" fill="url(#shadow)" />
 
-  <path d="M 16 75 L 42 34 L 64 75 Z" fill="url(#lsBackRidge)" />
-  <path d="M 32 75 L 64 18 L 64 75 Z" fill="url(#lsMainPeakLit)" />
-  <path d="M 64 18 L 86 75 L 64 75 Z" fill="url(#lsMainPeakShadow)" />
+  <path d="M 62 20 L 52 46 L 62 58 L 48 75" stroke="#ef4444" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="14" y1="75" x2="86" y2="75" stroke="#475569" stroke-width="2" stroke-linecap="round" />
 
-  <path d="M 22 62 L 38 62 L 46 50 L 54 68 L 62 54 L 78 54" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#lsGlow)" />
-  <path d="M 22 62 L 38 62 L 46 50 L 54 68 L 62 54 L 78 54" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-
-  <circle cx="64" cy="18" r="4" fill="#10b981" />
-  <circle cx="64" cy="18" r="7" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.7" />
+  <circle cx="62" cy="20" r="4.5" fill="#10b981" />
+  <circle cx="62" cy="20" r="8.5" stroke="#10b981" stroke-width="1.5" stroke-opacity="0.75" />
 </svg>
