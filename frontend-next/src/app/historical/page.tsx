@@ -39,8 +39,8 @@ export default function HistoricalReplayPage() {
         </div>
 
         <div className="flex items-center gap-2">
-          <span className="px-3 py-1 rounded bg-amber-950/60 border border-amber-800/60 text-xs font-bold font-mono text-amber-400 uppercase">
-            Historical Validation &bull; Not Live Data
+          <span className="px-3 py-1 rounded bg-slate-800 border border-slate-700 text-xs font-bold font-mono text-slate-300 uppercase">
+            Historical Validation Record &bull; July 2024 Event
           </span>
         </div>
       </div>

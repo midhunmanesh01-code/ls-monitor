@@ -70,7 +70,7 @@ export default function RainfallPage() {
             `}
           >
             <Clock size={14} />
-            {isReplayMode ? 'Exit Demo Replay' : 'Launch SIH 3-Min Event Replay'}
+            {isReplayMode ? 'Exit Scenario Playback' : 'Simulate Storm Sequence Playback'}
           </button>
         </div>
       </div>

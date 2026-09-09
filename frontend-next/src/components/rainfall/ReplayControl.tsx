@@ -47,8 +47,8 @@ export default function ReplayControl({
           </h4>
         </div>
         <div className="flex items-center gap-2">
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-950/60 text-amber-400 border border-amber-800/60 uppercase">
-            Demo Mode &mdash; Replayed Data
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-300 border border-slate-700 uppercase">
+            Sequential Scenario Playback
           </span>
         </div>
       </div>

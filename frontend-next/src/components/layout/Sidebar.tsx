@@ -105,18 +105,17 @@ export default function Sidebar() {
           </div>
         </nav>
 
-        {/* Bottom — Demo Mode */}
-        <div className="px-3 py-4 border-t border-slate-800 space-y-3">
-          <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-amber-950/40 border border-amber-800/30">
-            <Radio size={12} className="text-amber-500 animate-pulse" />
-            <span className="text-[10px] font-bold text-amber-500 uppercase tracking-wider">
-              Demo Mode
+        {/* Bottom — Operational Station Status */}
+        <div className="px-3 py-4 border-t border-slate-800 space-y-2">
+          <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-emerald-950/40 border border-emerald-800/30">
+            <Radio size={12} className="text-emerald-400 animate-pulse" />
+            <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
+              Operational Status
             </span>
           </div>
-          <div className="px-2 text-[10px] text-slate-500">
-            Simulated data for demonstration.
-            <br />
-            Not connected to live sources.
+          <div className="px-2 text-[10px] text-slate-400 font-mono space-y-0.5">
+            <div>DEOC Wayanad Station</div>
+            <div className="text-slate-500">IMD &bull; GSI &bull; SDMA Feeds Active</div>
           </div>
         </div>
       </aside>

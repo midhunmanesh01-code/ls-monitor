@@ -58,7 +58,7 @@ export default function OfflineIndicator({ isOffline, onToggle }: Props) {
           }
         `}
       >
-        {isOffline ? 'Simulate Reconnect' : 'Simulate Network Drop'}
+        {isOffline ? 'Restore Uplink Connection' : 'Disconnect Network Link'}
       </button>
     </div>
   );

@@ -35,7 +35,7 @@ export default function AlertsPage() {
   const handleReset = () => {
     resetAlerts();
     loadAlerts();
-    setStatusNotification('Demo alerts reset to initial baseline state.');
+    setStatusNotification('Alert status records restored to initial state.');
     setTimeout(() => setStatusNotification(null), 3000);
   };
 
@@ -75,7 +75,7 @@ export default function AlertsPage() {
             onClick={handleReset}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors flex items-center gap-1.5"
           >
-            <RefreshCw size={12} /> Reset Demo Alerts
+            <RefreshCw size={12} /> Reset Records
           </button>
         </div>
       </div>

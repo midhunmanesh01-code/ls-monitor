@@ -34,7 +34,7 @@ export default function FieldReportsPage() {
   const handleReset = () => {
     resetFieldReports();
     refreshReports();
-    setNotification('Demo field observations reset to baseline.');
+    setNotification('Field observation log restored to initial baseline.');
     setTimeout(() => setNotification(null), 3000);
   };
 
