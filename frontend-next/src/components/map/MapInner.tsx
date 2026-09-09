@@ -1,11 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import L from 'leaflet';
 import { MapContainer as LeafletMapContainer, TileLayer, Polygon, Polyline, CircleMarker, Marker, Popup, useMap } from 'react-leaflet';
 import type { Zone, Road, Building, LandslideMarker, FieldReport } from '@/types';
 import { RISK_COLORS, formatObservationType } from '@/lib/utils';
 import StatusBadge from '@/components/common/StatusBadge';
+import { Layers } from 'lucide-react';
 
 // Fix leaflet marker icons in Next.js
 delete (L.Icon.Default.prototype as unknown as Record<string, unknown>)._getIconUrl;
@@ -68,6 +69,8 @@ export default function MapInner({
   selectedZoneId,
   onZoneSelect,
 }: Props) {
+  const [legendOpen, setLegendOpen] = useState(false);
+
   return (
     <LeafletMapContainer
       center={[11.555, 76.120]}
@@ -193,37 +196,64 @@ export default function MapInner({
         </Marker>
       ))}
 
-      {/* Legend */}
-      <div className="leaflet-bottom leaflet-left">
-        <div className="leaflet-control bg-slate-900/90 border border-slate-700 rounded-lg p-3 m-3 text-[10px]">
-          <div className="font-bold text-slate-200 mb-2">Legend</div>
-          <div className="space-y-1.5">
-            {(['NORMAL', 'WATCH', 'HIGH', 'CRITICAL'] as const).map(cat => (
-              <div key={cat} className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-sm border" style={{ backgroundColor: RISK_COLORS[cat], borderColor: RISK_COLORS[cat] }} />
-                <span className="text-slate-300">{cat} Risk Zone</span>
+      {/* Responsive Collapsible Legend */}
+      <div className="leaflet-bottom leaflet-left pointer-events-auto">
+        <div className="leaflet-control m-2 sm:m-3">
+          <button
+            type="button"
+            onClick={() => setLegendOpen(!legendOpen)}
+            className="sm:hidden px-2.5 py-1.5 rounded-lg bg-slate-900/95 border border-slate-700 text-[10px] font-bold text-slate-200 shadow-xl flex items-center gap-1.5"
+          >
+            <Layers size={12} className="text-amber-400" />
+            <span>{legendOpen ? 'Hide Legend' : 'Legend'}</span>
+          </button>
+
+          <div
+            className={`
+              ${legendOpen ? 'block' : 'hidden sm:block'}
+              bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-lg p-2.5 sm:p-3 mt-1.5 sm:mt-0 text-[10px] shadow-2xl max-w-[190px]
+            `}
+          >
+            <div className="font-bold text-slate-200 mb-1.5 flex items-center justify-between">
+              <span>Map Legend</span>
+              {legendOpen && (
+                <button
+                  type="button"
+                  onClick={() => setLegendOpen(false)}
+                  className="sm:hidden text-slate-400 hover:text-slate-200 text-[10px] px-1"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            <div className="space-y-1 sm:space-y-1.5">
+              {(['NORMAL', 'WATCH', 'HIGH', 'CRITICAL'] as const).map(cat => (
+                <div key={cat} className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-sm border shrink-0" style={{ backgroundColor: RISK_COLORS[cat], borderColor: RISK_COLORS[cat] }} />
+                  <span className="text-slate-300">{cat} Risk</span>
+                </div>
+              ))}
+              <div className="border-t border-slate-700 my-1" />
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-0.5 bg-red-500 shrink-0" />
+                <span className="text-slate-300">NH Road</span>
               </div>
-            ))}
-            <div className="border-t border-slate-700 my-1.5" />
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-0.5 bg-red-500" />
-              <span className="text-slate-300">NH Road</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-0.5 bg-orange-500" />
-              <span className="text-slate-300">SH Road</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 bg-red-500 rounded-full border border-white" />
-              <span className="text-slate-300">Critical Facility</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 bg-red-500 rotate-45 border border-white" />
-              <span className="text-slate-300">Historical Landslide</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 bg-blue-500 rounded-full border border-white" />
-              <span className="text-slate-300">Field Report</span>
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-0.5 bg-orange-500 shrink-0" />
+                <span className="text-slate-300">SH Road</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-red-500 rounded-full border border-white shrink-0" />
+                <span className="text-slate-300">Facility</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-red-500 rotate-45 border border-white shrink-0" />
+                <span className="text-slate-300">Landslide</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-blue-500 rounded-full border border-white shrink-0" />
+                <span className="text-slate-300">Field Obs</span>
+              </div>
             </div>
           </div>
         </div>

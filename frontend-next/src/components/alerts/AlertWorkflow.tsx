@@ -31,7 +31,7 @@ export default function AlertWorkflow({ currentStatus }: Props) {
         )}
       </div>
 
-      <div className="flex items-center justify-between overflow-x-auto pb-1 gap-1">
+      <div className="flex items-center justify-between overflow-x-auto no-scrollbar pb-1 gap-1">
         {WORKFLOW_STEPS.map((step, idx) => {
           const isCurrent = step.status === currentStatus;
           const isCompleted = currentIndex > idx;

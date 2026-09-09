@@ -33,34 +33,57 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Mobile hamburger */}
-      <button
-        className="lg:hidden fixed top-3 left-3 z-50 p-2 rounded-md bg-slate-800 text-slate-200 border border-slate-700"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label="Toggle menu"
-      >
-        {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-      </button>
+      {/* Mobile Top Header Bar */}
+      <header className="lg:hidden shrink-0 bg-slate-950/95 backdrop-blur-md border-b border-slate-800 px-3 py-2.5 flex items-center justify-between z-30">
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-amber-600/20 border border-amber-600/40 flex items-center justify-center">
+            <Mountain className="w-4 h-4 text-amber-500" />
+          </div>
+          <div>
+            <div className="text-xs font-bold text-slate-100 tracking-wide flex items-center gap-1.5">
+              <span>Landslide Monitor</span>
+              <span className="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase font-mono font-semibold">
+                Wayanad
+              </span>
+            </div>
+          </div>
+        </Link>
 
-      {/* Overlay */}
+        <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/50 border border-emerald-800/40 text-[10px] font-mono text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="font-bold hidden xs:inline">LIVE</span>
+          </div>
+
+          <button
+            className="p-2 rounded-lg bg-slate-900 text-slate-200 border border-slate-700 hover:bg-slate-800 transition-colors"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </header>
+
+      {/* Mobile Drawer Overlay */}
       {mobileOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/60 z-40"
+          className="lg:hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 transition-opacity"
           onClick={() => setMobileOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* Sidebar (Drawer on mobile, static on desktop) */}
       <aside
         className={`
-          fixed top-0 left-0 h-full w-64 bg-slate-950 border-r border-slate-800 z-40
-          flex flex-col transition-transform duration-200
+          fixed top-0 left-0 h-full w-72 max-w-[85vw] bg-slate-950 border-r border-slate-800 z-50
+          flex flex-col transition-transform duration-200 ease-out shadow-2xl
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full'}
-          lg:translate-x-0 lg:static lg:z-auto
+          lg:translate-x-0 lg:static lg:z-auto lg:w-64 lg:shadow-none
         `}
       >
-        {/* Logo */}
-        <div className="px-4 py-5 border-b border-slate-800">
+        {/* Logo / Drawer Header */}
+        <div className="px-4 py-4 border-b border-slate-800 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-lg bg-amber-600/20 border border-amber-600/40 flex items-center justify-center">
               <Mountain className="w-5 h-5 text-amber-500" />
@@ -74,11 +97,20 @@ export default function Sidebar() {
               </span>
             </div>
           </div>
+
+          {/* Close button inside mobile drawer */}
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="lg:hidden p-1.5 rounded-md text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+            aria-label="Close menu"
+          >
+            <X size={18} />
+          </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 py-3 px-2 overflow-y-auto">
-          <div className="space-y-0.5">
+        <nav className="flex-1 py-3 px-2.5 overflow-y-auto">
+          <div className="space-y-1">
             {NAV_ITEMS.map((item) => {
               const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
               const Icon = item.icon;
@@ -88,17 +120,17 @@ export default function Sidebar() {
                   href={item.href}
                   onClick={() => setMobileOpen(false)}
                   className={`
-                    flex items-center gap-3 px-3 py-2.5 rounded-md text-[13px] font-medium
+                    flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium
                     transition-colors duration-100
                     ${
                       isActive
-                        ? 'bg-slate-800/80 text-amber-400 border-l-2 border-amber-500'
+                        ? 'bg-amber-600/15 text-amber-400 border-l-2 border-amber-500 font-semibold shadow-sm'
                         : 'text-slate-400 hover:bg-slate-800/40 hover:text-slate-200'
                     }
                   `}
                 >
-                  <Icon size={16} className={isActive ? 'text-amber-400' : 'text-slate-500'} />
-                  {item.label}
+                  <Icon size={18} className={isActive ? 'text-amber-400' : 'text-slate-500'} />
+                  <span>{item.label}</span>
                 </Link>
               );
             })}
@@ -106,8 +138,8 @@ export default function Sidebar() {
         </nav>
 
         {/* Bottom — Operational Station Status */}
-        <div className="px-3 py-4 border-t border-slate-800 space-y-2">
-          <div className="flex items-center gap-2 px-2 py-1.5 rounded-md bg-emerald-950/40 border border-emerald-800/30">
+        <div className="px-3 py-4 border-t border-slate-800 space-y-2 bg-slate-950/80">
+          <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-emerald-950/40 border border-emerald-800/30">
             <Radio size={12} className="text-emerald-400 animate-pulse" />
             <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">
               Operational Status
@@ -115,7 +147,7 @@ export default function Sidebar() {
           </div>
           <div className="px-2 text-[10px] text-slate-400 font-mono space-y-0.5">
             <div>DEOC Wayanad Station</div>
-            <div className="text-slate-500">IMD &bull; GSI &bull; SDMA Feeds Active</div>
+            <div className="text-slate-500 text-[9px]">IMD &bull; GSI &bull; SDMA Feeds Active</div>
           </div>
         </div>
       </aside>

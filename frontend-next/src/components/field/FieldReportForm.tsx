@@ -127,23 +127,23 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
         <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
           <AlertTriangle size={13} className="text-amber-400" /> Observed Severity
         </label>
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
           {(['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'] as const).map((sev) => (
             <button
               type="button"
               key={sev}
               onClick={() => setSeverity(sev)}
               className={`
-                py-1.5 px-2 rounded text-xs font-bold transition-all border
+                py-2 px-2 rounded text-xs font-bold transition-all border text-center
                 ${
                   severity === sev
                     ? sev === 'CRITICAL'
-                      ? 'bg-red-600 text-slate-950 border-red-500'
+                      ? 'bg-red-600 text-slate-950 border-red-500 shadow-sm'
                       : sev === 'HIGH'
-                      ? 'bg-orange-600 text-slate-950 border-orange-500'
+                      ? 'bg-orange-600 text-slate-950 border-orange-500 shadow-sm'
                       : sev === 'MEDIUM'
-                      ? 'bg-amber-600 text-slate-950 border-amber-500'
-                      : 'bg-emerald-600 text-slate-950 border-emerald-500'
+                      ? 'bg-amber-600 text-slate-950 border-amber-500 shadow-sm'
+                      : 'bg-emerald-600 text-slate-950 border-emerald-500 shadow-sm'
                     : 'bg-slate-950 border-slate-800 text-slate-400 hover:text-slate-200'
                 }
               `}
@@ -172,7 +172,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
 
       {/* Location Name & GPS */}
       <div className="space-y-2">
-        <label className="text-xs font-semibold text-slate-300 flex items-center justify-between">
+        <label className="text-xs font-semibold text-slate-300 flex flex-wrap items-center justify-between gap-1">
           <span className="flex items-center gap-1.5">
             <MapPin size={13} className="text-red-400" /> Ground Location & GPS Fix
           </span>
@@ -181,7 +181,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
             onClick={handleSimulateGPS}
             className="text-[10px] text-amber-400 hover:text-amber-300 underline font-mono"
           >
-            Acquire GPS Position Fix
+            Acquire GPS Fix
           </button>
         </label>
         <input
@@ -192,7 +192,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
           className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500"
           required
         />
-        <div className="p-2 rounded bg-slate-950/70 border border-slate-800 text-[11px] font-mono text-slate-400 flex items-center justify-between">
+        <div className="p-2 rounded bg-slate-950/70 border border-slate-800 text-[10px] sm:text-[11px] font-mono text-slate-400 flex flex-wrap items-center justify-between gap-1">
           <span>Lat: {coordinates[0]}° N</span>
           <span>Lng: {coordinates[1]}° E</span>
           <span className="text-emerald-400 font-bold">Accuracy: ±3.2m</span>
@@ -203,7 +203,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
       <div className="space-y-1.5">
         <label className="text-xs font-semibold text-slate-300 flex items-center justify-between">
           <span className="flex items-center gap-1.5">
-            <Camera size={13} className="text-indigo-400" /> Evidence Geotagged Photos
+            <Camera size={13} className="text-indigo-400" /> Evidence Photos
           </span>
           <span className="text-[10px] text-slate-400 font-mono">{photoCount} attached</span>
         </label>
@@ -211,7 +211,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
           <button
             type="button"
             onClick={() => setPhotoCount((p) => Math.min(4, p + 1))}
-            className="flex-1 py-1.5 px-3 rounded bg-slate-950 border border-slate-700 text-xs text-slate-300 hover:border-slate-500 transition-colors flex items-center justify-center gap-1.5"
+            className="flex-1 py-2 px-3 rounded bg-slate-950 border border-slate-700 text-xs text-slate-300 hover:border-slate-500 transition-colors flex items-center justify-center gap-1.5"
           >
             <Camera size={13} /> Add Photo ({photoCount}/4)
           </button>
@@ -219,7 +219,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
             <button
               type="button"
               onClick={() => setPhotoCount(0)}
-              className="py-1.5 px-2.5 rounded bg-slate-950 border border-slate-800 text-xs text-red-400 hover:bg-slate-900"
+              className="py-2 px-3 rounded bg-slate-950 border border-slate-800 text-xs text-red-400 hover:bg-slate-900"
             >
               Clear
             </button>
@@ -257,7 +257,7 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
         type="submit"
         disabled={submitting}
         className={`
-          w-full py-2.5 px-4 rounded text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg
+          w-full py-3 px-4 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 shadow-lg min-h-[44px]
           ${
             isOffline
               ? 'bg-amber-600 hover:bg-amber-500 text-slate-950'
@@ -265,11 +265,11 @@ export default function FieldReportForm({ isOffline, onReportSubmitted }: Props)
           }
         `}
       >
-        <Send size={13} />
+        <Send size={14} />
         {submitting
           ? 'Saving Report...'
           : isOffline
-          ? 'Save to Local Offline Queue (PENDING)'
+          ? 'Save to Local Offline Queue'
           : 'Transmit Field Report to Control Room'}
       </button>
 

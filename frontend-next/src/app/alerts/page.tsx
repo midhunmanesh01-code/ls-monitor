@@ -70,10 +70,10 @@ export default function AlertsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleReset}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors flex items-center gap-1.5"
+            className="w-full sm:w-auto px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors flex items-center justify-center gap-1.5"
           >
             <RefreshCw size={12} /> Reset Records
           </button>
@@ -99,26 +99,26 @@ export default function AlertsPage() {
       )}
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono flex items-center gap-1">
-          <Filter size={12} /> Filter:
+      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        <span className="text-[10px] uppercase tracking-wider text-slate-500 font-mono font-bold shrink-0 flex items-center gap-1">
+          <Filter size={11} /> Filter:
         </span>
         {[
           { key: 'ALL', label: 'All Protocols' },
-          { key: 'ACTIVE', label: 'Active Operational' },
-          { key: 'DRAFT', label: 'System Drafts' },
+          { key: 'ACTIVE', label: 'Active' },
+          { key: 'DRAFT', label: 'Drafts' },
           { key: 'AWAITING', label: 'Awaiting Auth' },
           { key: 'AUTHORIZED', label: 'Authorized' },
-          { key: 'CLOSED', label: 'Archived / Closed' },
+          { key: 'CLOSED', label: 'Closed' },
         ].map((tab) => (
           <button
             key={tab.key}
             onClick={() => setFilter(tab.key)}
             className={`
-              px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border
+              px-2.5 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border whitespace-nowrap
               ${
                 filter === tab.key
-                  ? 'bg-slate-800 border-amber-500 text-amber-300 font-bold'
+                  ? 'bg-slate-800 border-amber-500 text-amber-300 font-bold shadow-sm'
                   : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
               }
             `}

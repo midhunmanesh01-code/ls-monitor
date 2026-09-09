@@ -46,12 +46,12 @@ export default function HistoricalReplayPage() {
       </div>
 
       {/* Case Study Context Card */}
-      <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-3">
-        <div className="flex items-center justify-between">
-          <h3 className="text-sm font-bold text-slate-100">
+      <div className="p-3.5 sm:p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-2.5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
+          <h3 className="text-xs sm:text-sm font-bold text-slate-100">
             Case Study: Mundakkai–Chooralmala Slope Disaster (July 28–30, 2024)
           </h3>
-          <span className="text-[11px] font-mono text-slate-400">Location: Meppadi Taluk, Wayanad</span>
+          <span className="text-[10px] sm:text-[11px] font-mono text-slate-400">Location: Meppadi, Wayanad</span>
         </div>
         <p className="text-xs text-slate-300 leading-relaxed">
           During late July 2024, extreme orographic monsoon precipitation over the Western Ghats escarpment generated cumulative antecedent rainfall exceeding 400 mm in 72 hours. This replay demonstrates how the Landslide Monitor platform steps through telemetry ingestion, empirical threshold breaches, officer authorization, citizen field truthing, and emergency response ranking.

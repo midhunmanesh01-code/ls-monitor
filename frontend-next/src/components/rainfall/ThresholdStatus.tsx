@@ -54,7 +54,7 @@ export default function ThresholdStatus({
             </span>
           </div>
           <ProgressBar value={cumulative24h} max={threshold24h} showValue={false} size="md" />
-          <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <div className="flex flex-col xs:flex-row justify-between xs:items-center text-[10px] text-slate-500 font-mono gap-1">
             <span>+24h Forecast: +{forecast24h} mm</span>
             <span>
               {pct24 >= 100 ? (
@@ -77,7 +77,7 @@ export default function ThresholdStatus({
         {/* 72h Threshold */}
         <div className="p-3 rounded bg-slate-950/60 border border-slate-800/80 space-y-2">
           <div className="flex justify-between items-center text-xs">
-            <span className="font-semibold text-slate-300">72-Hour Cumulative (Antecedent)</span>
+            <span className="font-semibold text-slate-300">72-Hour Cumulative</span>
             <span className="font-mono text-slate-400">
               <strong className={pct72 >= 100 ? 'text-red-400' : pct72 >= 75 ? 'text-orange-400' : 'text-slate-200'}>
                 {cumulative72h} mm
@@ -86,7 +86,7 @@ export default function ThresholdStatus({
             </span>
           </div>
           <ProgressBar value={cumulative72h} max={threshold72h} showValue={false} size="md" />
-          <div className="flex justify-between items-center text-[10px] text-slate-500 font-mono">
+          <div className="flex flex-col xs:flex-row justify-between xs:items-center text-[10px] text-slate-500 font-mono gap-1">
             <span>+72h Forecast: +{forecast72h} mm</span>
             <span>
               {pct72 >= 100 ? (
@@ -101,9 +101,9 @@ export default function ThresholdStatus({
         </div>
       </div>
 
-      <div className="flex items-center justify-between text-xs px-1 text-slate-400">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs px-1 text-slate-400 gap-1.5 pt-1">
         <span>Current Rainfall Rate: <strong className="text-sky-300 font-mono">{currentRate} mm/h</strong></span>
-        <span className="text-[10px] text-slate-500">Methodology: Intensity-Duration (I-D) Threshold Model</span>
+        <span className="text-[10px] text-slate-500">Intensity-Duration (I-D) Model</span>
       </div>
     </div>
   );

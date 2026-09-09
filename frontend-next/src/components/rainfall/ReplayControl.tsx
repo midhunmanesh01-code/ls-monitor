@@ -54,25 +54,25 @@ export default function ReplayControl({
       </div>
 
       {/* Frame Details & Narrative */}
-      <div className="p-3 rounded bg-slate-950/80 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="p-3 rounded bg-slate-950/80 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
         <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-bold text-amber-400">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-xs font-bold text-amber-400 shrink-0">
               Stage {currentFrameIndex + 1} of {totalFrames}:
             </span>
             <span className="text-xs font-semibold text-slate-100">
               {currentFrame.label}
             </span>
           </div>
-          <div className="text-[11px] text-slate-400 font-mono">
-            Event Timestamp: {formatTimestamp(currentFrame.timestamp)}
+          <div className="text-[10px] sm:text-[11px] text-slate-400 font-mono">
+            Event Time: {formatTimestamp(currentFrame.timestamp)}
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex flex-col items-end">
-            <span className="text-[10px] text-slate-400 uppercase font-mono">Replay Risk Score</span>
-            <span className="text-lg font-black font-mono text-slate-100">
+        <div className="flex items-center justify-between sm:justify-end gap-3 pt-1 sm:pt-0 border-t sm:border-t-0 border-slate-800">
+          <div className="flex flex-col items-start sm:items-end">
+            <span className="text-[9px] text-slate-400 uppercase font-mono">Replay Risk</span>
+            <span className="text-base sm:text-lg font-black font-mono text-slate-100">
               {currentFrame.riskScore}/100
             </span>
           </div>
@@ -82,7 +82,7 @@ export default function ReplayControl({
 
       {/* Frame Sequence Steps Bar */}
       <div className="space-y-1.5">
-        <div className="grid grid-cols-6 gap-1.5">
+        <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
           {frames.map((frame, idx) => {
             const isActive = idx === currentFrameIndex;
             const isPast = idx < currentFrameIndex;
@@ -91,10 +91,10 @@ export default function ReplayControl({
                 key={idx}
                 onClick={() => onJumpToFrame(idx)}
                 className={`
-                  p-1.5 rounded text-left transition-all border
+                  p-1.5 sm:p-2 rounded text-left transition-all border
                   ${
                     isActive
-                      ? 'bg-amber-600/30 border-amber-500 text-amber-200'
+                      ? 'bg-amber-600/30 border-amber-500 text-amber-200 shadow-sm'
                       : isPast
                       ? 'bg-slate-800 border-slate-700 text-slate-300'
                       : 'bg-slate-950/50 border-slate-800/60 text-slate-500 hover:border-slate-700'
@@ -128,27 +128,29 @@ export default function ReplayControl({
       )}
 
       {/* Transport Controls */}
-      <div className="flex items-center justify-between pt-1">
-        <div className="flex items-center gap-1.5">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-1">
+        <div className="flex items-center justify-center gap-1.5">
           <button
             onClick={onReset}
-            className="p-2 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
+            className="p-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
             title="Reset to beginning"
+            aria-label="Reset sequence"
           >
-            <RotateCcw size={14} />
+            <RotateCcw size={15} />
           </button>
           <button
             onClick={onStepBackward}
             disabled={currentFrameIndex === 0}
-            className="p-2 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-slate-800 transition-colors border border-slate-700"
+            className="p-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-slate-800 transition-colors border border-slate-700"
             title="Step backward"
+            aria-label="Step backward"
           >
-            <StepBack size={14} />
+            <StepBack size={15} />
           </button>
           <button
             onClick={isPlaying ? onPause : onPlay}
             className={`
-              flex items-center gap-1.5 px-4 py-2 rounded text-xs font-bold transition-colors shadow-lg
+              flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-5 py-2.5 rounded-lg text-xs font-bold transition-colors shadow-lg
               ${
                 isPlaying
                   ? 'bg-amber-600 hover:bg-amber-500 text-slate-950'
@@ -158,33 +160,34 @@ export default function ReplayControl({
           >
             {isPlaying ? (
               <>
-                <Pause size={14} /> Pause Sequence
+                <Pause size={15} /> Pause Sequence
               </>
             ) : (
               <>
-                <Play size={14} /> Play Progression
+                <Play size={15} /> Play Progression
               </>
             )}
           </button>
           <button
             onClick={onStepForward}
             disabled={currentFrameIndex === totalFrames - 1}
-            className="p-2 rounded bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-slate-800 transition-colors border border-slate-700"
+            className="p-2.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 disabled:opacity-40 disabled:hover:bg-slate-800 transition-colors border border-slate-700"
             title="Step forward"
+            aria-label="Step forward"
           >
-            <StepForward size={14} />
+            <StepForward size={15} />
           </button>
         </div>
 
         {/* Speed selection */}
-        <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 p-1 rounded">
+        <div className="flex items-center justify-center gap-1 bg-slate-950 border border-slate-800 p-1 rounded-lg">
           <span className="text-[10px] text-slate-500 font-mono px-1">Speed:</span>
           {([1, 2, 4] as const).map((s) => (
             <button
               key={s}
               onClick={() => onSetSpeed(s)}
               className={`
-                px-2 py-0.5 rounded text-[10px] font-mono font-bold transition-colors
+                px-2.5 py-1 rounded text-[10px] font-mono font-bold transition-colors
                 ${speed === s ? 'bg-amber-600 text-slate-950' : 'text-slate-400 hover:text-slate-200'}
               `}
             >

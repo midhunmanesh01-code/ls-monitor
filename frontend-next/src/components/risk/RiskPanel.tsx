@@ -61,29 +61,41 @@ export default function RiskPanel({ zone, onClose }: Props) {
   );
 
   return (
-    <div className="w-full md:w-[420px] bg-slate-950/95 backdrop-blur border-l border-slate-800 flex flex-col h-full overflow-hidden shadow-2xl z-30">
-      {/* Header */}
-      <div className="p-4 border-b border-slate-800 flex items-start justify-between bg-slate-900/50">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <h3 className="text-base font-bold text-slate-100">{zone.name}</h3>
-            <RiskBadge category={zone.riskCategory} size="sm" />
-          </div>
-          <p className="text-xs text-slate-400 leading-snug">{zone.description}</p>
-          <div className="flex items-center gap-3 mt-2 text-[10px] text-slate-500 font-mono">
-            <span>Elevation: {zone.elevation}</span>
-            <span>•</span>
-            <span>Terrain: {zone.terrain.split(',')[0]}</span>
-          </div>
+    <>
+      {/* Backdrop on mobile */}
+      <div
+        className="md:hidden fixed inset-0 bg-black/50 z-30 transition-opacity"
+        onClick={onClose}
+      />
+
+      <div className="fixed md:static inset-x-0 bottom-0 md:inset-auto h-[80vh] md:h-full w-full md:w-[420px] bg-slate-950/98 md:bg-slate-950/95 backdrop-blur-md border-t md:border-t-0 md:border-l border-slate-800 flex flex-col overflow-hidden shadow-2xl z-40 rounded-t-2xl md:rounded-none animate-in slide-in-from-bottom-5 duration-200">
+        {/* Mobile Handle Indicator */}
+        <div className="md:hidden pt-2.5 pb-1 flex justify-center shrink-0">
+          <div className="w-12 h-1.5 bg-slate-700/80 rounded-full" />
         </div>
-        <button
-          onClick={onClose}
-          className="p-1 rounded text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors"
-          aria-label="Close risk panel"
-        >
-          <X size={18} />
-        </button>
-      </div>
+
+        {/* Header */}
+        <div className="p-3.5 sm:p-4 border-b border-slate-800 flex items-start justify-between bg-slate-900/50 shrink-0">
+          <div className="min-w-0 pr-2">
+            <div className="flex items-center gap-2 mb-1 flex-wrap">
+              <h3 className="text-sm sm:text-base font-bold text-slate-100 truncate">{zone.name}</h3>
+              <RiskBadge category={zone.riskCategory} size="sm" />
+            </div>
+            <p className="text-xs text-slate-400 leading-snug line-clamp-2">{zone.description}</p>
+            <div className="flex items-center gap-2 sm:gap-3 mt-1.5 text-[10px] text-slate-500 font-mono flex-wrap">
+              <span>Elev: {zone.elevation}</span>
+              <span>•</span>
+              <span>Terrain: {zone.terrain.split(',')[0]}</span>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-200 hover:bg-slate-800 transition-colors shrink-0"
+            aria-label="Close risk panel"
+          >
+            <X size={18} />
+          </button>
+        </div>
 
       {/* Content */}
       <div className="flex-1 overflow-y-auto p-4 space-y-5">
@@ -183,5 +195,6 @@ export default function RiskPanel({ zone, onClose }: Props) {
         )}
       </div>
     </div>
-  );
+  </>
+);
 }

@@ -65,12 +65,12 @@ export default function FieldReportsPage() {
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={handleReset}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors flex items-center gap-1.5"
+            className="w-full sm:w-auto px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700 transition-colors flex items-center justify-center gap-1.5"
           >
-            <RefreshCw size={12} /> Reset Reports
+            <RefreshCw size={12} /> Reset Baseline
           </button>
         </div>
       </div>
@@ -84,7 +84,7 @@ export default function FieldReportsPage() {
         <div className="space-y-0.5">
           <span className="font-bold text-slate-200">Verification Protocol Required:</span>
           <p className="text-[11px] text-slate-400">
-            Unverified citizen or field submissions are strictly quarantined from triggering automated warnings. Only geological officers can upgrade an observation to <strong>VERIFIED</strong>.
+            Unverified submissions are quarantined from automated alarms. Only geological officers can upgrade an observation to <strong>VERIFIED</strong>.
           </p>
         </div>
       </div>
@@ -98,22 +98,22 @@ export default function FieldReportsPage() {
 
       {/* Main Tabs (Feed vs Submit Form) */}
       <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={() => setActiveTab('FEED')}
             className={`
-              px-4 py-2 rounded-lg text-xs font-bold transition-all border flex items-center gap-2
+              flex-1 sm:flex-initial px-3.5 py-2 rounded-lg text-xs font-bold transition-all border flex items-center justify-center gap-1.5
               ${
                 activeTab === 'FEED'
-                  ? 'bg-slate-800 border-amber-500 text-amber-300'
+                  ? 'bg-slate-800 border-amber-500 text-amber-300 shadow-sm'
                   : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
               }
             `}
           >
-            <ListFilter size={14} /> Ground Intel Feed ({reports.length})
+            <ListFilter size={14} /> Intel Feed ({reports.length})
             {unverifiedCount > 0 && (
               <span className="px-1.5 py-0.2 rounded-full bg-amber-500 text-slate-950 font-mono text-[10px]">
-                {unverifiedCount} new
+                {unverifiedCount}
               </span>
             )}
           </button>
@@ -121,15 +121,15 @@ export default function FieldReportsPage() {
           <button
             onClick={() => setActiveTab('SUBMIT')}
             className={`
-              px-4 py-2 rounded-lg text-xs font-bold transition-all border flex items-center gap-2
+              flex-1 sm:flex-initial px-3.5 py-2 rounded-lg text-xs font-bold transition-all border flex items-center justify-center gap-1.5
               ${
                 activeTab === 'SUBMIT'
-                  ? 'bg-slate-800 border-amber-500 text-amber-300'
+                  ? 'bg-slate-800 border-amber-500 text-amber-300 shadow-sm'
                   : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
               }
             `}
           >
-            <PlusCircle size={14} /> Submit New Observation
+            <PlusCircle size={14} /> Submit Obs.
           </button>
         </div>
       </div>
@@ -146,27 +146,27 @@ export default function FieldReportsPage() {
           />
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6">
           {/* Filters for Feed */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500 font-mono">
-              Status:
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+            <span className="text-[10px] uppercase tracking-wider text-slate-500 font-mono font-bold shrink-0">
+              Filter:
             </span>
             {[
               { key: 'ALL', label: 'All Observations' },
-              { key: 'UNVERIFIED', label: 'Unverified (Pending Review)' },
+              { key: 'UNVERIFIED', label: 'Unverified (Pending)' },
               { key: 'UNDER_REVIEW', label: 'Under Review' },
-              { key: 'VERIFIED', label: 'Verified by Geologist' },
+              { key: 'VERIFIED', label: 'Verified' },
               { key: 'REJECTED', label: 'Rejected' },
             ].map((tab) => (
               <button
                 key={tab.key}
                 onClick={() => setVerificationFilter(tab.key)}
                 className={`
-                  px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border
+                  px-2.5 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border whitespace-nowrap
                   ${
                     verificationFilter === tab.key
-                      ? 'bg-slate-800 border-amber-500 text-amber-300 font-bold'
+                      ? 'bg-slate-800 border-amber-500 text-amber-300 font-bold shadow-sm'
                       : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
                   }
                 `}

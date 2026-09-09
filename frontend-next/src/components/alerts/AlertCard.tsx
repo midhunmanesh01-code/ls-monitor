@@ -84,7 +84,7 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
         </div>
 
         {/* Status specific actions */}
-        <div className="p-2.5 rounded bg-slate-950/70 border border-slate-800 flex flex-wrap items-center justify-between gap-2">
+        <div className="p-3 rounded-lg bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
           <div className="text-[11px] text-slate-400 flex items-center gap-1.5">
             {alert.status === 'DRAFT' && (
               <span className="text-slate-400 flex items-center gap-1">
@@ -119,7 +119,7 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 w-full sm:w-auto">
             {alert.status === 'DRAFT' && (
               <button
                 onClick={() =>
@@ -128,9 +128,9 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                     'Draft submitted to District Disaster Control Room for review.'
                   )
                 }
-                className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-amber-600 text-slate-950 hover:bg-amber-500 transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-amber-600 text-slate-950 hover:bg-amber-500 transition-colors shadow-sm"
               >
-                <Send size={12} /> Submit for Authorization
+                <Send size={12} /> Submit for Auth
               </button>
             )}
 
@@ -142,9 +142,9 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                     'Authorized by District Collector. Dispatched to local response units.'
                   )
                 }
-                className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-blue-600 text-slate-100 hover:bg-blue-500 transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-blue-600 text-slate-100 hover:bg-blue-500 transition-colors shadow-sm"
               >
-                <UserCheck size={12} /> Authorize & Issue Alert
+                <UserCheck size={12} /> Authorize & Issue
               </button>
             )}
 
@@ -156,7 +156,7 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                     'Receipt acknowledged by Meppadi Taluk Office and PWD Control.'
                   )
                 }
-                className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-violet-600 text-slate-100 hover:bg-violet-500 transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-violet-600 text-slate-100 hover:bg-violet-500 transition-colors shadow-sm"
               >
                 <CheckCircle2 size={12} /> Acknowledge Receipt
               </button>
@@ -170,14 +170,14 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                     'Field team dispatched to inspect slopes and road culverts.'
                   )
                 }
-                className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-cyan-600 text-slate-100 hover:bg-cyan-500 transition-colors"
+                className="w-full sm:w-auto flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-bold bg-cyan-600 text-slate-100 hover:bg-cyan-500 transition-colors shadow-sm"
               >
                 <Eye size={12} /> Begin Verification
               </button>
             )}
 
             {alert.status === 'UNDER_VERIFICATION' && (
-              <div className="flex gap-1.5">
+              <div className="flex gap-1.5 w-full sm:w-auto">
                 <button
                   onClick={() =>
                     handleAction(
@@ -185,7 +185,7 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                       'Field inspection confirmed hazard stabilized. Debris cleared.'
                     )
                   }
-                  className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-emerald-600 text-slate-950 hover:bg-emerald-500 transition-colors"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-bold bg-emerald-600 text-slate-950 hover:bg-emerald-500 transition-colors"
                 >
                   <CheckCircle2 size={12} /> Close Alert
                 </button>
@@ -196,9 +196,9 @@ export default function AlertCard({ alert, onStatusChange }: Props) {
                       'Field team observed major slope fissure. Escalated to State Emergency Operations Centre (SEOC).'
                     )
                   }
-                  className="flex items-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-red-600 text-slate-100 hover:bg-red-500 transition-colors"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-2 rounded-lg text-xs font-bold bg-red-600 text-slate-100 hover:bg-red-500 transition-colors"
                 >
-                  <AlertTriangle size={12} /> Escalate to SEOC
+                  <AlertTriangle size={12} /> Escalate
                 </button>
               </div>
             )}

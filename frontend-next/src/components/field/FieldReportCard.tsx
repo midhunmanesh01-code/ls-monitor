@@ -116,28 +116,28 @@ export default function FieldReportCard({ report, onVerify }: Props) {
       {(report.verificationStatus === 'UNVERIFIED' || report.verificationStatus === 'UNDER_REVIEW') && (
         <div className="pt-2 border-t border-slate-800/80 space-y-2">
           {!showReviewInput ? (
-            <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <span className="text-[10px] text-amber-400 flex items-center gap-1 font-semibold">
-                <AlertTriangle size={11} /> Unverified Field Intel &mdash; Authority Review Required
+                <AlertTriangle size={11} className="shrink-0" /> Authority Review Required
               </span>
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 flex-wrap">
                 <button
                   onClick={() => handleVerify('VERIFIED')}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold bg-emerald-600 text-slate-950 hover:bg-emerald-500 transition-colors"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-emerald-600 text-slate-950 hover:bg-emerald-500 transition-colors shadow-sm"
                 >
-                  <CheckCircle size={11} /> Verify
+                  <CheckCircle size={12} /> Verify
                 </button>
                 <button
                   onClick={() => setShowReviewInput(true)}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors border border-slate-700"
                 >
-                  Add Review Note...
+                  Add Note
                 </button>
                 <button
                   onClick={() => handleVerify('REJECTED')}
-                  className="flex items-center gap-1 px-2.5 py-1 rounded text-xs font-bold bg-red-950 text-red-400 hover:bg-red-900 transition-colors border border-red-800"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-1 px-3 py-1.5 rounded text-xs font-bold bg-red-950 text-red-400 hover:bg-red-900 transition-colors border border-red-800"
                 >
-                  <XCircle size={11} /> Reject
+                  <XCircle size={12} /> Reject
                 </button>
               </div>
             </div>

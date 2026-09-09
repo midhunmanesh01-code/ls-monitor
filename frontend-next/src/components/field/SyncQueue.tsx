@@ -25,11 +25,11 @@ export default function SyncQueue({
 
   return (
     <div className="p-4 rounded-lg bg-slate-900/90 border border-slate-800 space-y-4">
-      <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-800 pb-2.5 gap-2">
         <div className="flex items-center gap-2">
-          <Database className="w-4 h-4 text-sky-400" />
+          <Database className="w-4 h-4 text-sky-400 shrink-0" />
           <h4 className="text-xs font-bold uppercase tracking-wider text-slate-100">
-            Offline Storage & Synchronization Queue
+            Storage & Sync Queue
           </h4>
         </div>
         <div className="flex items-center gap-2">
@@ -40,23 +40,23 @@ export default function SyncQueue({
       </div>
 
       {/* Sync Action Button */}
-      <div className="p-3 rounded bg-slate-950/70 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div className="p-3 rounded bg-slate-950/70 border border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="text-xs text-slate-300 space-y-0.5">
           <div className="font-semibold flex items-center gap-1.5">
             {pendingReports.length > 0 ? (
               <>
-                <Clock size={13} className="text-amber-400" />
-                <span>{pendingReports.length} observation(s) waiting in local browser store</span>
+                <Clock size={13} className="text-amber-400 shrink-0" />
+                <span>{pendingReports.length} observation(s) waiting in local store</span>
               </>
             ) : (
               <>
-                <CheckCircle2 size={13} className="text-emerald-400" />
-                <span>All local reports synchronized with Central Disaster Database</span>
+                <CheckCircle2 size={13} className="text-emerald-400 shrink-0" />
+                <span>All local reports synchronized with Central Command</span>
               </>
             )}
           </div>
           <p className="text-[10px] text-slate-500">
-            Uses local IndexedDB / memory queue with idempotent retry protocol.
+            IndexedDB local queue with idempotent retry protocol.
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function SyncQueue({
           onClick={onSyncAll}
           disabled={isSyncing || isOffline || pendingReports.length === 0}
           className={`
-            px-4 py-2 rounded text-xs font-bold transition-all flex items-center justify-center gap-2
+            w-full sm:w-auto px-4 py-2.5 rounded-lg text-xs font-bold transition-all flex items-center justify-center gap-2 shrink-0
             ${
               isSyncing
                 ? 'bg-blue-600/50 text-blue-200 cursor-wait'

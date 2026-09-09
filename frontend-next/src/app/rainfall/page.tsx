@@ -57,11 +57,11 @@ export default function RainfallPage() {
         </div>
 
         {/* Replay Mode Toggle */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={() => setIsReplayMode(!isReplayMode)}
             className={`
-              px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all border flex items-center gap-2
+              w-full sm:w-auto px-3.5 py-2 rounded-lg text-xs font-bold transition-all border flex items-center justify-center gap-2 shadow-sm
               ${
                 isReplayMode
                   ? 'bg-amber-600 text-slate-950 border-amber-500 shadow-lg'
@@ -70,7 +70,7 @@ export default function RainfallPage() {
             `}
           >
             <Clock size={14} />
-            {isReplayMode ? 'Exit Scenario Playback' : 'Simulate Storm Sequence Playback'}
+            {isReplayMode ? 'Exit Scenario Playback' : 'Simulate Storm Playback'}
           </button>
         </div>
       </div>
@@ -97,9 +97,9 @@ export default function RainfallPage() {
       )}
 
       {/* Sector Selection Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-1">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-400 shrink-0 font-mono">
-          Select Sector:
+      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+        <span className="text-[10px] uppercase tracking-wider text-slate-400 shrink-0 font-mono font-bold">
+          Sector:
         </span>
         {zones.map((zone) => {
           const isSelected = zone.id === selectedZoneId;
@@ -109,18 +109,18 @@ export default function RainfallPage() {
               key={zone.id}
               onClick={() => setSelectedZoneId(zone.id)}
               className={`
-                px-3 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border flex items-center gap-2
+                px-2.5 py-1.5 rounded-lg text-xs font-semibold shrink-0 transition-all border flex items-center gap-1.5
                 ${
                   isSelected
-                    ? 'bg-slate-800 border-amber-500 text-amber-400 font-bold'
+                    ? 'bg-slate-800 border-amber-500 text-amber-400 font-bold shadow-sm'
                     : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
                 }
               `}
             >
-              <span>{zone.name}</span>
+              <span className="whitespace-nowrap">{zone.name.split('–')[0]}</span>
               {zRain && (
-                <span className="font-mono text-[10px] px-1.5 py-0.5 rounded bg-slate-950 border border-slate-700">
-                  {zRain.cumulative24h} mm
+                <span className="font-mono text-[10px] px-1.5 py-0.2 rounded bg-slate-950 border border-slate-700">
+                  {zRain.cumulative24h}mm
                 </span>
               )}
             </button>

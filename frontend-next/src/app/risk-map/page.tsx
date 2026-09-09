@@ -32,50 +32,53 @@ export default function RiskMapPage() {
   const selectedZone = zones.find((z) => z.id === selectedZoneId) || null;
 
   return (
-    <div className="flex flex-col h-[calc(100vh-29px)] overflow-hidden bg-slate-950">
+    <div className="flex flex-col h-full overflow-hidden bg-slate-950">
       {/* Header bar */}
-      <div className="bg-slate-900/90 border-b border-slate-800 px-4 py-2.5 flex items-center justify-between shrink-0">
-        <div className="flex items-center gap-2.5">
-          <MapIcon className="w-4 h-4 text-amber-400" />
-          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-100">
-            Geographic Information System (GIS) Hazard Map
+      <div className="bg-slate-900/90 border-b border-slate-800 px-3 sm:px-4 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 shrink-0">
+        <div className="flex items-center gap-2">
+          <MapIcon className="w-4 h-4 text-amber-400 shrink-0" />
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-100 truncate">
+            GIS Hazard & Spatial Overlay Map
           </h2>
-          <span className="text-slate-600">•</span>
-          <span className="text-[11px] text-slate-400 font-mono">
-            Spatial Susceptibility & Infrastructure Overlay
+          <span className="text-slate-600 hidden md:inline">•</span>
+          <span className="text-[11px] text-slate-400 font-mono hidden md:inline truncate">
+            Wayanad Pilot Sectors
           </span>
         </div>
 
-        {/* Quick Layer Filter Toggles */}
-        <div className="hidden sm:flex items-center gap-2 text-xs">
+        {/* Layer Filter Toggles - Accessible on both mobile and desktop! */}
+        <div className="flex items-center gap-1.5 text-xs overflow-x-auto no-scrollbar pb-0.5 w-full sm:w-auto">
+          <span className="text-[10px] uppercase font-mono font-bold text-slate-500 shrink-0 sm:hidden">
+            Layers:
+          </span>
           <button
             onClick={() => setShowRoads(!showRoads)}
-            className={`px-2 py-1 rounded border text-[11px] transition-colors ${
-              showRoads ? 'bg-slate-800 border-amber-500/60 text-amber-300' : 'bg-slate-950 border-slate-800 text-slate-500'
+            className={`px-2 py-1 rounded border text-[11px] shrink-0 transition-colors ${
+              showRoads ? 'bg-slate-800 border-amber-500/60 text-amber-300 font-semibold' : 'bg-slate-950 border-slate-800 text-slate-500'
             }`}
           >
             Roads
           </button>
           <button
             onClick={() => setShowBuildings(!showBuildings)}
-            className={`px-2 py-1 rounded border text-[11px] transition-colors ${
-              showBuildings ? 'bg-slate-800 border-sky-500/60 text-sky-300' : 'bg-slate-950 border-slate-800 text-slate-500'
+            className={`px-2 py-1 rounded border text-[11px] shrink-0 transition-colors ${
+              showBuildings ? 'bg-slate-800 border-sky-500/60 text-sky-300 font-semibold' : 'bg-slate-950 border-slate-800 text-slate-500'
             }`}
           >
             Structures
           </button>
           <button
             onClick={() => setShowLandslides(!showLandslides)}
-            className={`px-2 py-1 rounded border text-[11px] transition-colors ${
-              showLandslides ? 'bg-slate-800 border-red-500/60 text-red-300' : 'bg-slate-950 border-slate-800 text-slate-500'
+            className={`px-2 py-1 rounded border text-[11px] shrink-0 transition-colors ${
+              showLandslides ? 'bg-slate-800 border-red-500/60 text-red-300 font-semibold' : 'bg-slate-950 border-slate-800 text-slate-500'
             }`}
           >
-            Historical Incidents
+            Incidents
           </button>
           <button
             onClick={() => setShowFieldReports(!showFieldReports)}
-            className={`px-2 py-1 rounded border text-[11px] transition-colors ${
-              showFieldReports ? 'bg-slate-800 border-emerald-500/60 text-emerald-300' : 'bg-slate-950 border-slate-800 text-slate-500'
+            className={`px-2 py-1 rounded border text-[11px] shrink-0 transition-colors ${
+              showFieldReports ? 'bg-slate-800 border-emerald-500/60 text-emerald-300 font-semibold' : 'bg-slate-950 border-slate-800 text-slate-500'
             }`}
           >
             Field Intel
@@ -85,10 +88,10 @@ export default function RiskMapPage() {
 
       {/* Main Container */}
       <div className="flex-1 relative flex flex-col md:flex-row min-h-0 overflow-hidden">
-        {/* Left Sector Directory (Collapsible) */}
+        {/* Left Sector Directory (Desktop sidebar) */}
         <div
           className={`
-            bg-slate-950/90 border-r border-slate-800 flex flex-col shrink-0 transition-all z-20
+            hidden md:flex bg-slate-950/90 border-r border-slate-800 flex-col shrink-0 transition-all z-20
             ${sidebarCollapsed ? 'w-10' : 'w-72'}
           `}
         >
@@ -140,7 +143,30 @@ export default function RiskMapPage() {
         </div>
 
         {/* Map Area */}
-        <div className="flex-1 relative min-h-[350px] h-full">
+        <div className="flex-1 relative min-h-0 h-full">
+          {/* Quick Zone Switcher Bar for Mobile & Quick Access */}
+          <div className="md:hidden absolute top-2 left-2 right-2 z-20 flex items-center gap-1.5 bg-slate-950/90 backdrop-blur p-1.5 rounded-lg border border-slate-800 shadow-xl overflow-x-auto no-scrollbar max-w-[calc(100%-16px)]">
+            <span className="text-[10px] uppercase font-mono font-bold text-slate-400 px-1 shrink-0">
+              Sector:
+            </span>
+            {zones.map((z) => (
+              <button
+                key={z.id}
+                onClick={() => setSelectedZoneId(z.id)}
+                className={`
+                  px-2.5 py-1 rounded text-xs font-semibold transition-all border shrink-0 whitespace-nowrap
+                  ${
+                    selectedZoneId === z.id
+                      ? 'bg-amber-600 text-slate-950 border-amber-500 shadow-md font-bold'
+                      : 'bg-slate-900/90 text-slate-300 border-slate-700/60 hover:bg-slate-800'
+                  }
+                `}
+              >
+                {z.name.split('–')[0]}
+              </button>
+            ))}
+          </div>
+
           <DynamicMap
             zones={zones}
             roads={showRoads ? DEMO_ROADS : []}
