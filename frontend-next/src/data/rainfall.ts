@@ -1,0 +1,260 @@
+// ============================================================
+// Demo Data — Rainfall
+// ============================================================
+
+import type { RainfallData, RainfallReading, ReplayFrame } from '@/types';
+
+function generateReadings(baseValue: number, hours: number): RainfallReading[] {
+  const readings: RainfallReading[] = [];
+  const now = Date.now();
+  let cumulative24h = 0;
+  let cumulative72h = 0;
+
+  for (let i = hours; i >= 0; i--) {
+    const variation = (Math.sin(i * 0.5) + 1) * 0.5;
+    const value = Math.round((baseValue * variation + Math.random() * baseValue * 0.3) * 10) / 10;
+    if (i <= 24) cumulative24h += value;
+    cumulative72h += value;
+    readings.push({
+      timestamp: new Date(now - i * 3600000).toISOString(),
+      value,
+      cumulative24h: Math.round(cumulative24h * 10) / 10,
+      cumulative72h: Math.round(cumulative72h * 10) / 10,
+    });
+  }
+  return readings;
+}
+
+export const DEMO_RAINFALL: Record<string, RainfallData> = {
+  'zone-a': {
+    zoneId: 'zone-a',
+    current: 8.2,
+    cumulative24h: 142.5,
+    cumulative72h: 285.3,
+    forecast24h: 95.0,
+    forecast72h: 180.0,
+    thresholdStatus: 'HIGH',
+    threshold24h: 150.0,
+    threshold72h: 300.0,
+    readings: generateReadings(6, 72),
+    dataStatus: {
+      source: 'IMD AWS + Replay',
+      state: 'SIMULATED',
+      lastUpdate: new Date(Date.now() - 10 * 60000).toISOString(),
+      freshness: 'FRESH',
+      confidence: 'MEDIUM',
+    },
+  },
+  'zone-b': {
+    zoneId: 'zone-b',
+    current: 3.5,
+    cumulative24h: 68.2,
+    cumulative72h: 145.8,
+    forecast24h: 45.0,
+    forecast72h: 90.0,
+    thresholdStatus: 'WATCH',
+    threshold24h: 150.0,
+    threshold72h: 300.0,
+    readings: generateReadings(3, 72),
+    dataStatus: {
+      source: 'IMD AWS + Replay',
+      state: 'SIMULATED',
+      lastUpdate: new Date(Date.now() - 8 * 60000).toISOString(),
+      freshness: 'FRESH',
+      confidence: 'HIGH',
+    },
+  },
+  'zone-c': {
+    zoneId: 'zone-c',
+    current: 12.4,
+    cumulative24h: 198.6,
+    cumulative72h: 412.0,
+    forecast24h: 120.0,
+    forecast72h: 220.0,
+    thresholdStatus: 'CRITICAL',
+    threshold24h: 150.0,
+    threshold72h: 300.0,
+    readings: generateReadings(8, 72),
+    dataStatus: {
+      source: 'IMD AWS + Replay',
+      state: 'SIMULATED',
+      lastUpdate: new Date(Date.now() - 5 * 60000).toISOString(),
+      freshness: 'FRESH',
+      confidence: 'HIGH',
+    },
+  },
+  'zone-d': {
+    zoneId: 'zone-d',
+    current: 1.2,
+    cumulative24h: 28.4,
+    cumulative72h: 65.2,
+    forecast24h: 20.0,
+    forecast72h: 40.0,
+    thresholdStatus: 'NORMAL',
+    threshold24h: 150.0,
+    threshold72h: 300.0,
+    readings: generateReadings(1.5, 72),
+    dataStatus: {
+      source: 'IMD AWS + Replay',
+      state: 'SIMULATED',
+      lastUpdate: new Date(Date.now() - 15 * 60000).toISOString(),
+      freshness: 'FRESH',
+      confidence: 'HIGH',
+    },
+  },
+  'zone-e': {
+    zoneId: 'zone-e',
+    current: 9.8,
+    cumulative24h: 135.0,
+    cumulative72h: 268.5,
+    forecast24h: 100.0,
+    forecast72h: 190.0,
+    thresholdStatus: 'HIGH',
+    threshold24h: 150.0,
+    threshold72h: 300.0,
+    readings: generateReadings(5.5, 72),
+    dataStatus: {
+      source: 'IMD AWS + Replay',
+      state: 'SIMULATED',
+      lastUpdate: new Date(Date.now() - 20 * 60000).toISOString(),
+      freshness: 'FRESH',
+      confidence: 'MEDIUM',
+    },
+  },
+};
+
+// Replay frames for the historical event demo
+export const DEMO_REPLAY_FRAMES: ReplayFrame[] = [
+  {
+    frameIndex: 0,
+    timestamp: '2024-07-28T06:00:00+05:30',
+    label: 'Day 1 Morning — Normal Conditions',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 2.1,
+      cumulative24h: 35.0,
+      cumulative72h: 80.0,
+      forecast24h: 60.0,
+      forecast72h: 140.0,
+      thresholdStatus: 'NORMAL',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-28T06:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 25,
+    riskCategory: 'NORMAL',
+    thresholdStatus: 'NORMAL',
+    events: ['Normal monsoon rainfall', 'No field observations'],
+  },
+  {
+    frameIndex: 1,
+    timestamp: '2024-07-29T00:00:00+05:30',
+    label: 'Day 1 Night — Rainfall Increasing',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 8.5,
+      cumulative24h: 85.0,
+      cumulative72h: 155.0,
+      forecast24h: 90.0,
+      forecast72h: 200.0,
+      thresholdStatus: 'WATCH',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-29T00:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 42,
+    riskCategory: 'WATCH',
+    thresholdStatus: 'WATCH',
+    events: ['Continuous heavy rainfall through night', 'IMD issues orange alert for Wayanad'],
+  },
+  {
+    frameIndex: 2,
+    timestamp: '2024-07-29T12:00:00+05:30',
+    label: 'Day 2 Noon — Threshold Approaching',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 14.2,
+      cumulative24h: 132.0,
+      cumulative72h: 240.0,
+      forecast24h: 100.0,
+      forecast72h: 180.0,
+      thresholdStatus: 'HIGH',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-29T12:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 65,
+    riskCategory: 'HIGH',
+    thresholdStatus: 'HIGH',
+    events: ['24h rainfall approaching threshold', 'Field officer reports seepage near Mundakkai', 'Draft alert prepared'],
+  },
+  {
+    frameIndex: 3,
+    timestamp: '2024-07-29T22:00:00+05:30',
+    label: 'Day 2 Night — Threshold Exceeded',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 18.5,
+      cumulative24h: 168.0,
+      cumulative72h: 310.0,
+      forecast24h: 80.0,
+      forecast72h: 150.0,
+      thresholdStatus: 'CRITICAL',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-29T22:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 85,
+    riskCategory: 'CRITICAL',
+    thresholdStatus: 'CRITICAL',
+    events: ['Both 24h and 72h thresholds exceeded', 'Active slope movement detected', 'Alert authorized by District Collector', 'Evacuation advisory for Mundakkai area'],
+  },
+  {
+    frameIndex: 4,
+    timestamp: '2024-07-30T02:00:00+05:30',
+    label: 'Day 3 Early Morning — Event',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 22.0,
+      cumulative24h: 195.0,
+      cumulative72h: 380.0,
+      forecast24h: 40.0,
+      forecast72h: 80.0,
+      thresholdStatus: 'CRITICAL',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-30T02:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 95,
+    riskCategory: 'CRITICAL',
+    thresholdStatus: 'CRITICAL',
+    events: ['Major debris flow at Mundakkai', 'Road NH-766 blocked', 'Rescue operations initiated', 'Multiple field reports incoming'],
+  },
+  {
+    frameIndex: 5,
+    timestamp: '2024-07-30T12:00:00+05:30',
+    label: 'Day 3 Afternoon — Response & Verification',
+    rainfall: {
+      zoneId: 'zone-c',
+      current: 4.0,
+      cumulative24h: 170.0,
+      cumulative72h: 350.0,
+      forecast24h: 20.0,
+      forecast72h: 45.0,
+      thresholdStatus: 'HIGH',
+      threshold24h: 150.0,
+      threshold72h: 300.0,
+      readings: [],
+      dataStatus: { source: 'Historical', state: 'REPLAYED', lastUpdate: '2024-07-30T12:00:00+05:30', freshness: 'FRESH', confidence: 'HIGH' },
+    },
+    riskScore: 72,
+    riskCategory: 'HIGH',
+    thresholdStatus: 'HIGH',
+    events: ['Rainfall subsiding', 'Field teams verifying damage', 'Multiple field reports verified', 'Response priority assessment updated'],
+  },
+];
