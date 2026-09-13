@@ -199,6 +199,44 @@ uvicorn app.main:app --reload --port 8000
 
 ---
 
+## 👥 Collaborators
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/yourusername">
+        <img src="https://github.com/yourusername.png" width="100px;" alt="Your Name"/>
+        <br />
+        <sub><b>Your Name</b></sub>
+      </a>
+      <br />
+      <sub>Lead Developer</sub>
+    </td>
+
+    <td align="center">
+      <a href="https://github.com/username">
+        <img src="https://github.com/username.png" width="100px;" alt="Collaborator 1"/>
+        <br />
+        <sub><b>Collaborator 1</b></sub>
+      </a>
+      <br />
+      <sub>Frontend Developer</sub>
+    </td>
+
+    <td align="center">
+      <a href="https://github.com/username">
+        <img src="https://github.com/username.png" width="100px;" alt="Collaborator 2"/>
+        <br />
+        <sub><b>Collaborator 2</b></sub>
+      </a>
+      <br />
+      <sub>Backend Developer</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE.md).
