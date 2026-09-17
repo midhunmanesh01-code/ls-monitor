@@ -204,33 +204,58 @@ uvicorn app.main:app --reload --port 8000
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/yourusername">
-        <img src="https://github.com/yourusername.png" width="100px;" alt="Your Name"/>
+      <a href="https://github.com/midhunmanesh01-code">
+        <img src="https://github.com/midhunmanesh01-code.png" width="100px;" alt="Midhun Manesh"/>
         <br />
-        <sub><b>Your Name</b></sub>
+        <sub><b>Midhun Manesh</b></sub>
       </a>
       <br />
       <sub>Lead Developer</sub>
     </td>
-
     <td align="center">
-      <a href="https://github.com/username">
-        <img src="https://github.com/username.png" width="100px;" alt="Collaborator 1"/>
+      <a href="https://github.com/Akshay-152">
+        <img src="https://github.com/Akshay-152.png" width="100px;" alt="Collaborator 2"/>
         <br />
-        <sub><b>Collaborator 1</b></sub>
-      </a>
-      <br />
-      <sub>Frontend Developer</sub>
-    </td>
-
-    <td align="center">
-      <a href="https://github.com/username">
-        <img src="https://github.com/username.png" width="100px;" alt="Collaborator 2"/>
-        <br />
-        <sub><b>Collaborator 2</b></sub>
+        <sub><b>Akshay P K</b></sub>
       </a>
       <br />
       <sub>Backend Developer</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/MikhelJoseph">
+        <img src="https://github.com/MikhelJoseph.png" width="100px;" alt="Collaborator 1"/>
+        <br />
+        <sub><b>Mikhel Joseph Sam</b></sub>
+      </a>
+      <br />
+      <sub>Team Member</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/anupamaanil67-collab">
+        <img src="https://github.com/anupamaanil67-collab.png" width="100px;" alt="Collaborator 1"/>
+        <br />
+        <sub><b>Anupama Anil</b></sub>
+      </a>
+      <br />
+      <sub>Team Member</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/nandanadevi17">
+        <img src="https://github.com/nandanadevi17.png" width="100px;" alt="Collaborator 1"/>
+        <br />
+        <sub><b>Nandana Devi</b></sub>
+      </a>
+      <br />
+      <sub>Team Member</sub>
+    </td>
+    <td align="center">
+      <a href="https://github.com/sreesankar065">
+        <img src="https://github.com/sreesankar065.png" width="100px;" alt="Collaborator 1"/>
+        <br />
+        <sub><b>Sree Sankaranarayanan H</b></sub>
+      </a>
+      <br />
+      <sub>Team Member</sub>
     </td>
   </tr>
 </table>
